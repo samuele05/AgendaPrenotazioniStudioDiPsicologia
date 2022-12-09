@@ -14,6 +14,9 @@ namespace StudioPsicologia
         string specializzazione;
         bool inCarica;
 
+        int inizioOrario;
+        int fineOrario;
+
 
         public string _nome { get { return nome; } set { nome = value; } }
         public string _cognome { get { return cognome; } set { cognome = value; } }
@@ -21,7 +24,11 @@ namespace StudioPsicologia
         public string _specializzazione { get { return specializzazione; } set { specializzazione = value; } }
         public bool _inCarica { get { return inCarica; } set { inCarica = value; } }
 
-        public Medico(string nome, string cognome, string specializzazione, bool inCarica)
+        public int _inizioOrario { get { return inizioOrario; } set { inizioOrario = value; } }
+        public int _fineOrario { get { return fineOrario; } set { fineOrario = value; } }
+
+
+        public Medico(string nome, string cognome, string specializzazione, bool inCarica, int inizioOrario, int fineOrario)
         {
             this.nome = nome;
             this.cognome = cognome;
@@ -29,9 +36,10 @@ namespace StudioPsicologia
             this.specializzazione = specializzazione;
             this.inCarica = inCarica;
 
-
+            this.inizioOrario = inizioOrario;
+            this.fineOrario = fineOrario;
         }
-        public Medico() : this("Medico", "Medico", "//", false) { }
+        public Medico() : this("Medico", "Medico", "//", false, 0, 0) { }
 
 
         // override ToString
@@ -41,11 +49,11 @@ namespace StudioPsicologia
         }
 
 
-        // restituisce la quantità di byte occupata dal Medico nel file binario
-        public int getByte()
-        {
-            return 0;
-        }
+        //// restituisce la quantità di byte occupata dal Medico nel file binario
+        //public int getByte()
+        //{
+        //    return 0;
+        //}
 
 
         // formatta stringa
@@ -56,6 +64,14 @@ namespace StudioPsicologia
             else if (stringa.Length < 20)
                 stringa.PadRight(20);
             return stringa;
+        }
+
+        // formatta numero
+        private string formattaNumero(int numero)
+        {
+            if (numero < 10)
+                return $"{0}{numero}";
+            return numero.ToString();
         }
 
 
@@ -71,21 +87,20 @@ namespace StudioPsicologia
 
 
         // crea codice medico
-        private string codiceMedico()
+        private string codiceMedico()  // da controllare
         {
-            // restituisco un codice medico da salvare nel file
-            return "";
+            string codiceMedico =
+                $"{nome.Substring(0, 1).ToUpper()}" +
+                $"{cognome.Substring(0, 1).ToUpper()}" +
+                $"{specializzazione.Substring(0, 3).ToUpper()}" +
+                $"{inCarica.ToString().Substring(0, 1).ToUpper()}" +
+                $"{formattaNumero(inizioOrario)}" +
+                $"{formattaNumero(fineOrario)}";
+            return codiceMedico;
         }
         public string getCodice()
         {
             return codiceMedico();
         }
-
-
-
-
-
-
-
     }
 }

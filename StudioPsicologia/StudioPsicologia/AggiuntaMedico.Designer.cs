@@ -36,13 +36,20 @@ namespace StudioPsicologia
             this.tbSpecializzazioneMedico = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.btnAggiungiMedico = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.nudInizioOrario = new System.Windows.Forms.NumericUpDown();
+            this.nudFineOrario = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.nudInizioOrario)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFineOrario)).BeginInit();
             this.SuspendLayout();
             // 
             // tbCognomeMedico
             // 
             this.tbCognomeMedico.Location = new System.Drawing.Point(127, 60);
             this.tbCognomeMedico.Name = "tbCognomeMedico";
-            this.tbCognomeMedico.Size = new System.Drawing.Size(126, 20);
+            this.tbCognomeMedico.Size = new System.Drawing.Size(175, 20);
             this.tbCognomeMedico.TabIndex = 8;
             this.tbCognomeMedico.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbCognomeMedico_KeyPress);
             // 
@@ -50,7 +57,7 @@ namespace StudioPsicologia
             // 
             this.tbNomeMedico.Location = new System.Drawing.Point(127, 25);
             this.tbNomeMedico.Name = "tbNomeMedico";
-            this.tbNomeMedico.Size = new System.Drawing.Size(126, 20);
+            this.tbNomeMedico.Size = new System.Drawing.Size(175, 20);
             this.tbNomeMedico.TabIndex = 7;
             this.tbNomeMedico.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbNomeMedico_KeyPress);
             // 
@@ -76,7 +83,7 @@ namespace StudioPsicologia
             // 
             this.tbSpecializzazioneMedico.Location = new System.Drawing.Point(127, 95);
             this.tbSpecializzazioneMedico.Name = "tbSpecializzazioneMedico";
-            this.tbSpecializzazioneMedico.Size = new System.Drawing.Size(126, 20);
+            this.tbSpecializzazioneMedico.Size = new System.Drawing.Size(175, 20);
             this.tbSpecializzazioneMedico.TabIndex = 10;
             this.tbSpecializzazioneMedico.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSpecializzazioneMedico_KeyPress);
             // 
@@ -94,19 +101,65 @@ namespace StudioPsicologia
             this.btnAggiungiMedico.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.btnAggiungiMedico.FlatAppearance.BorderSize = 0;
             this.btnAggiungiMedico.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAggiungiMedico.Location = new System.Drawing.Point(26, 142);
+            this.btnAggiungiMedico.Location = new System.Drawing.Point(173, 162);
             this.btnAggiungiMedico.Name = "btnAggiungiMedico";
-            this.btnAggiungiMedico.Size = new System.Drawing.Size(227, 50);
+            this.btnAggiungiMedico.Size = new System.Drawing.Size(129, 55);
             this.btnAggiungiMedico.TabIndex = 11;
             this.btnAggiungiMedico.Text = "Aggiungi medico";
             this.btnAggiungiMedico.UseVisualStyleBackColor = false;
             this.btnAggiungiMedico.Click += new System.EventHandler(this.btnAggiungiMedico_Click);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(23, 138);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(35, 13);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Orario";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(23, 166);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(31, 13);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "Inizio";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(23, 199);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(27, 13);
+            this.label6.TabIndex = 14;
+            this.label6.Text = "Fine";
+            // 
+            // nudInizioOrario
+            // 
+            this.nudInizioOrario.Location = new System.Drawing.Point(69, 164);
+            this.nudInizioOrario.Name = "nudInizioOrario";
+            this.nudInizioOrario.Size = new System.Drawing.Size(74, 20);
+            this.nudInizioOrario.TabIndex = 15;
+            // 
+            // nudFineOrario
+            // 
+            this.nudFineOrario.Location = new System.Drawing.Point(69, 197);
+            this.nudFineOrario.Name = "nudFineOrario";
+            this.nudFineOrario.Size = new System.Drawing.Size(74, 20);
+            this.nudFineOrario.TabIndex = 16;
+            // 
             // AggiuntaMedico
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(280, 221);
+            this.ClientSize = new System.Drawing.Size(333, 246);
+            this.Controls.Add(this.nudInizioOrario);
+            this.Controls.Add(this.nudFineOrario);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.btnAggiungiMedico);
             this.Controls.Add(this.tbSpecializzazioneMedico);
             this.Controls.Add(this.label3);
@@ -115,8 +168,11 @@ namespace StudioPsicologia
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "AggiuntaMedico";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AggiuntaMedico";
             this.Load += new System.EventHandler(this.AggiuntaMedico_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.nudInizioOrario)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFineOrario)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -131,5 +187,10 @@ namespace StudioPsicologia
         private System.Windows.Forms.TextBox tbSpecializzazioneMedico;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnAggiungiMedico;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.NumericUpDown nudInizioOrario;
+        private System.Windows.Forms.NumericUpDown nudFineOrario;
     }
 }

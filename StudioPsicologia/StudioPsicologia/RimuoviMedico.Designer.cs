@@ -33,15 +33,15 @@ namespace StudioPsicologia
             this.label1 = new System.Windows.Forms.Label();
             this.btnRimuoviMedico = new System.Windows.Forms.Button();
             this.plInformazioniMedico = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.lblNomeMedico = new System.Windows.Forms.Label();
-            this.lblCognomeMedico = new System.Windows.Forms.Label();
-            this.lblSpecializzazioneMedico = new System.Windows.Forms.Label();
-            this.lblInCarica = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lblInCarica = new System.Windows.Forms.Label();
+            this.lblSpecializzazioneMedico = new System.Windows.Forms.Label();
+            this.lblCognomeMedico = new System.Windows.Forms.Label();
+            this.lblNomeMedico = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.btnSelezionaMedico = new System.Windows.Forms.Button();
             this.plInformazioniMedico.SuspendLayout();
             this.SuspendLayout();
@@ -92,68 +92,14 @@ namespace StudioPsicologia
             this.plInformazioniMedico.Size = new System.Drawing.Size(310, 143);
             this.plInformazioniMedico.TabIndex = 11;
             // 
-            // label2
+            // label6
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(20, 61);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(100, 13);
-            this.label2.TabIndex = 12;
-            this.label2.Text = "Informazioni medico";
-            // 
-            // lblNomeMedico
-            // 
-            this.lblNomeMedico.AutoSize = true;
-            this.lblNomeMedico.Location = new System.Drawing.Point(121, 19);
-            this.lblNomeMedico.Name = "lblNomeMedico";
-            this.lblNomeMedico.Size = new System.Drawing.Size(80, 13);
-            this.lblNomeMedico.TabIndex = 13;
-            this.lblNomeMedico.Text = "lblNomeMedico";
-            // 
-            // lblCognomeMedico
-            // 
-            this.lblCognomeMedico.AutoSize = true;
-            this.lblCognomeMedico.Location = new System.Drawing.Point(121, 52);
-            this.lblCognomeMedico.Name = "lblCognomeMedico";
-            this.lblCognomeMedico.Size = new System.Drawing.Size(97, 13);
-            this.lblCognomeMedico.TabIndex = 14;
-            this.lblCognomeMedico.Text = "lblCognomeMedico";
-            // 
-            // lblSpecializzazioneMedico
-            // 
-            this.lblSpecializzazioneMedico.AutoSize = true;
-            this.lblSpecializzazioneMedico.Location = new System.Drawing.Point(121, 84);
-            this.lblSpecializzazioneMedico.Name = "lblSpecializzazioneMedico";
-            this.lblSpecializzazioneMedico.Size = new System.Drawing.Size(130, 13);
-            this.lblSpecializzazioneMedico.TabIndex = 15;
-            this.lblSpecializzazioneMedico.Text = "lblSpecializzazioneMedico";
-            // 
-            // lblInCarica
-            // 
-            this.lblInCarica.AutoSize = true;
-            this.lblInCarica.Location = new System.Drawing.Point(121, 115);
-            this.lblInCarica.Name = "lblInCarica";
-            this.lblInCarica.Size = new System.Drawing.Size(56, 13);
-            this.lblInCarica.TabIndex = 16;
-            this.lblInCarica.Text = "lblInCarica";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(18, 19);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(38, 13);
-            this.label3.TabIndex = 17;
-            this.label3.Text = "Nome:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(18, 52);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(55, 13);
-            this.label4.TabIndex = 18;
-            this.label4.Text = "Cognome:";
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(18, 115);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(51, 13);
+            this.label6.TabIndex = 20;
+            this.label6.Text = "In carica:";
             // 
             // label5
             // 
@@ -164,14 +110,68 @@ namespace StudioPsicologia
             this.label5.TabIndex = 19;
             this.label5.Text = "Specializzazione:";
             // 
-            // label6
+            // label4
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(18, 115);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(51, 13);
-            this.label6.TabIndex = 20;
-            this.label6.Text = "In carica:";
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(18, 52);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(55, 13);
+            this.label4.TabIndex = 18;
+            this.label4.Text = "Cognome:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(18, 19);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(38, 13);
+            this.label3.TabIndex = 17;
+            this.label3.Text = "Nome:";
+            // 
+            // lblInCarica
+            // 
+            this.lblInCarica.AutoSize = true;
+            this.lblInCarica.Location = new System.Drawing.Point(121, 115);
+            this.lblInCarica.Name = "lblInCarica";
+            this.lblInCarica.Size = new System.Drawing.Size(56, 13);
+            this.lblInCarica.TabIndex = 16;
+            this.lblInCarica.Text = "lblInCarica";
+            // 
+            // lblSpecializzazioneMedico
+            // 
+            this.lblSpecializzazioneMedico.AutoSize = true;
+            this.lblSpecializzazioneMedico.Location = new System.Drawing.Point(121, 84);
+            this.lblSpecializzazioneMedico.Name = "lblSpecializzazioneMedico";
+            this.lblSpecializzazioneMedico.Size = new System.Drawing.Size(130, 13);
+            this.lblSpecializzazioneMedico.TabIndex = 15;
+            this.lblSpecializzazioneMedico.Text = "lblSpecializzazioneMedico";
+            // 
+            // lblCognomeMedico
+            // 
+            this.lblCognomeMedico.AutoSize = true;
+            this.lblCognomeMedico.Location = new System.Drawing.Point(121, 52);
+            this.lblCognomeMedico.Name = "lblCognomeMedico";
+            this.lblCognomeMedico.Size = new System.Drawing.Size(97, 13);
+            this.lblCognomeMedico.TabIndex = 14;
+            this.lblCognomeMedico.Text = "lblCognomeMedico";
+            // 
+            // lblNomeMedico
+            // 
+            this.lblNomeMedico.AutoSize = true;
+            this.lblNomeMedico.Location = new System.Drawing.Point(121, 19);
+            this.lblNomeMedico.Name = "lblNomeMedico";
+            this.lblNomeMedico.Size = new System.Drawing.Size(80, 13);
+            this.lblNomeMedico.TabIndex = 13;
+            this.lblNomeMedico.Text = "lblNomeMedico";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(20, 61);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(100, 13);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "Informazioni medico";
             // 
             // btnSelezionaMedico
             // 
@@ -198,6 +198,7 @@ namespace StudioPsicologia
             this.Controls.Add(this.tbCodiceMedico);
             this.Controls.Add(this.label1);
             this.Name = "RimuoviMedico";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "RimuoviMedico";
             this.Load += new System.EventHandler(this.RimuoviMedico_Load);
             this.plInformazioniMedico.ResumeLayout(false);

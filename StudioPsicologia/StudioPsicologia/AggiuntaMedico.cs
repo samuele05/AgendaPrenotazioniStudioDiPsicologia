@@ -50,63 +50,95 @@ namespace StudioPsicologia
             // bottoni
             btnAggiungiMedico.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, btnAggiungiMedico.Width, btnAggiungiMedico.Height, 10, 10));
         }
-
-
-
-
-
-
-
         Medico medico = new Medico();
+
+
+
+
+
+
 
         // bottone aggiungi medico
         private void btnAggiungiMedico_Click(object sender, EventArgs e)
         {
-            inizializzaMedico();
-
-            if (scriviMedico())
-                MessageBox.Show("Aggiunto", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (inizializzaMedico())
+            {
+                if (scriviMed())
+                    MessageBox.Show("Aggiunto", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                else
+                    MessageBox.Show("Esiste già o non è stao inserito nulla", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            } 
             else
-                MessageBox.Show("Esiste già o non è stao inserito nulla", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Inserire dei campi validi", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
 
         // inizializza medico
-        public void inizializzaMedico()
+        public bool inizializzaMedico()
         {
+            if (tbNomeMedico.Text == "" || tbCognomeMedico.Text == "" || tbSpecializzazioneMedico.Text == "")
+                return false;
+
             medico._nome = tbNomeMedico.Text;
             medico._cognome = tbCognomeMedico.Text;
             medico._specializzazione = tbSpecializzazioneMedico.Text;
             medico._inCarica = true;
+
+            int inizio = Convert.ToInt32(nudInizioOrario.Value);
+            int fine = Convert.ToInt32(nudFineOrario.Value);
+
+            if (inizio >= 0 && inizio < 23 && fine > 0 && fine <= 23)
+            {
+                if (inizio < fine)
+                {
+                    medico._inizioOrario = inizio;
+                    medico._fineOrario = fine;
+                    return true;
+                }
+            }
+            return false;
         }
 
-        // scrivi medico
-        public bool scriviMedico()
+
+        // funzione scrivi medico
+        public bool scriviMed()
+        {
+            if (!esiste(medico))
+            {
+                medico.scriviMedico();
+                return true;
+            }
+            return false;
+        }
+
+
+        // funzione esiste
+        private bool esiste(Medico med)
         {
             FileStream fs = new FileStream("Medici.bin", FileMode.OpenOrCreate);
-            BinaryWriter scrivi = new BinaryWriter(fs);
             BinaryReader leggi = new BinaryReader(fs);
 
+            // leggo
 
-            string codiceLetto = "";
+            //string codiceLetto = "";
 
-            // codice medico è = a "" perchè il metodo non è ancora stato definito
+            //if (codiceLetto == med.getCodice())
+            //{
+            //    fs.Close();
+            //    return true;
+            //}
 
-            if (tbNomeMedico.Text != "" &&
-                tbCognomeMedico.Text != "" &&
-                tbSpecializzazioneMedico.Text != "")
-            {
-                if (medico.getCodice() != codiceLetto)
-                {
-                    scrivi.Write(medico._nome);
-                    scrivi.Write(medico._cognome);
-                    scrivi.Write(medico._specializzazione);
-                    scrivi.Write(medico._inCarica);
-                }
-                else return false;
-            }
-            return true;
+            fs.Close();
+            return false;
         }
+
+
+
+
+
+
+        // cose da fare
+        // aggiungere lettura medici per controllare che non esistano già
 
 
 

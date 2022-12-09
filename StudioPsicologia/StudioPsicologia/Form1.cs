@@ -53,7 +53,124 @@ namespace StudioPsicologia
             btnAggiungiPaziente.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, btnAggiungiPaziente.Width, btnAggiungiPaziente.Height, 10, 10));
             btnAggiungiMedico.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, btnAggiungiMedico.Width, btnAggiungiMedico.Height, 10, 10));
             btnRimuoviMedico.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, btnRimuoviMedico.Width, btnRimuoviMedico.Height, 10, 10));
+            btnAggiungiAppuntamento.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, btnAggiungiAppuntamento.Width, btnAggiungiAppuntamento.Height, 10, 10));
+
+            // pannelli
+            plInformazioniAppuntamento.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, plInformazioniAppuntamento.Width, plInformazioniAppuntamento.Height, 10, 10));
+            plAppuntamento.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, plAppuntamento.Width, plAppuntamento.Height, 10, 10));
+
+            // carica pazienti
+            caricaPazienti();
+            caricaCbPazienti();
         }
+
+
+
+
+
+
+
+
+
+
+        // liste
+        List<Medico> medici = new List<Medico>();
+        List<Paziente> pazienti = new List<Paziente>();
+        List<Appuntamento> appuntamenti = new List<Appuntamento>();
+
+
+
+
+        public void caricaMedici()
+        {
+
+        }
+
+
+        // funzione carica pazienti leggendo da file
+        public void caricaPazienti()   // creare un paziente prima di caricarli + fare in modo che legga tutti i pazienti
+        {
+            FileStream fs = new FileStream("Pazienti.bin", FileMode.OpenOrCreate);
+            BinaryReader leggi = new BinaryReader(fs);
+
+            Paziente paz = new Paziente();
+
+            //paz._nome = leggi.ReadString();
+            //paz._cognome = leggi.ReadString();
+
+            //paz._giornoNascita = leggi.ReadInt32();
+            //paz._meseNascita = leggi.ReadInt32();
+            //paz._annoNascita = leggi.ReadInt32();
+
+            //paz._IBAN = leggi.ReadString();
+
+            //pazienti.Add(paz);
+
+            fs.Close();
+        }
+
+
+
+
+
+
+        // funzione carica pazienti nelle combo box
+        public void caricaCbPazienti()
+        {
+            for (int i = 0; i < pazienti.Count; i++)
+                cbPazienti.Items.Add($"{pazienti[i]._nome} {pazienti[i]._cognome} {pazienti[i].getCodice()}");
+        }
+
+        // funzione carica medici nelle combo box
+        public void caricaCbMedici()
+        {
+            for (int i = 0; i < medici.Count; i++)
+                cbMedici.Items.Add($"{medici[i]._nome} {medici[i]._cognome} {medici[i].getCodice()}");
+        }
+
+
+
+
+
+
+
+        // bottone aggiungi appuntamento
+        private void btnAggiungiAppuntamento_Click(object sender, EventArgs e) // verificare che l'appuntamento non esista già
+        {
+            Appuntamento app = new Appuntamento();
+
+            // definisci appuntamento
+            if (cbPazienti.Text != "" && cbMedici.Text != "")
+            {
+                string codicePaziente = cbPazienti.SelectedItem.ToString().Split(' ')[2];
+                string codiceMedico = cbMedici.SelectedItem.ToString().Split(' ')[2];
+
+
+                // definisci paziente
+                for (int i = 0; i < pazienti.Count; i++)
+                    if (pazienti[i].getCodice() == codicePaziente)
+                        app._paziente = pazienti[i];
+
+                // definisci medico
+                for (int i = 0; i < medici.Count; i++)
+                    if (medici[i].getCodice() == codiceMedico)
+                        app._medico = medici[i];
+
+                // definisci data
+                // cose belle
+
+                // definisci argomento
+                app._argomento = tbArgomentoAppuntamento.Text;
+
+            }
+            else
+                MessageBox.Show("Tutti i campi non sono stati inseriti", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+
+
+
+
+
 
 
 

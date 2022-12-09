@@ -14,6 +14,7 @@ namespace StudioPsicologia
         int giornoNascita;
         int meseNascita;
         int annoNascita;
+        string IBAN;
 
 
         public string  _nome { get { return nome; } set { nome = value; } }
@@ -23,7 +24,10 @@ namespace StudioPsicologia
         public int _meseNascita { get { return meseNascita; } set { meseNascita = value; } }
         public int _annoNascita { get { return annoNascita; } set { annoNascita = value; } }
 
-        public Paziente(string nome, string cognome, int giornoNascita, int meseNascita, int annoNascita)
+        public string _IBAN { get { return IBAN; } set { IBAN = value; } }
+
+
+        public Paziente(string nome, string cognome, int giornoNascita, int meseNascita, int annoNascita, string IBAN)
         {
             this.nome = nome;
             this.cognome = cognome;
@@ -32,10 +36,9 @@ namespace StudioPsicologia
             this.meseNascita = meseNascita;
             this.annoNascita = annoNascita;
 
-
-
+            this.IBAN = IBAN;
         }
-        public Paziente() : this( "Paziente", "Paziente", DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year) { }
+        public Paziente() : this( "Paziente", "Paziente", DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year, "IBAN") { }
 
 
         // override ToString
@@ -45,11 +48,11 @@ namespace StudioPsicologia
         }
 
 
-        // restituisce la quantità di byte occupata dal paziente nel file binario
-        public int getByte()
-        {
-            return 0;
-        }
+        //// restituisce la quantità di byte occupata dal paziente nel file binario
+        //public int getByte()
+        //{
+        //    return 0;
+        //}
 
 
         // formatta la stringa
@@ -68,26 +71,46 @@ namespace StudioPsicologia
         {
             FileStream fs = new FileStream("Pazienti.bin", FileMode.OpenOrCreate);
             BinaryWriter scrivi = new BinaryWriter(fs);
-            BinaryReader leggi = new BinaryReader(fs);
 
+            fs.Seek(0, SeekOrigin.End);       // chiedere se va bene
 
+            scrivi.Write(formattaStringa(nome));
+            scrivi.Write(formattaStringa(cognome));
+            scrivi.Write(giornoNascita);
+            scrivi.Write(meseNascita);
+            scrivi.Write(annoNascita);
 
-            // faccio belle cose
+            scrivi.Write(getCodice());
 
+            fs.Close();
         }
  
 
         // crea codice paziente
-        private string cadicePaziente()
+        //private string cadicePaziente()    // aggiungere identificatore paziente
+        //{
+        //    string codicePaziente = 
+        //        $"{nome.Substring(0, 1).ToUpper()}" +
+        //        $"{cognome.Substring(0, 1).ToUpper()}" +
+        //        $"{formattaNumero(giornoNascita)}" +
+        //        $"{formattaNumero(meseNascita)}" +
+        //        $"{annoNascita}";
+
+        //    return codicePaziente;
+        //}
+
+
+        private string formattaNumero(int numero)
         {
-            // restituisco un codice paziente da salvare nel file
-            return "";
+            if (numero < 10)
+                return $"{0}{numero}";
+            return numero.ToString();
         }
+
         public string getCodice()
         {
-            return cadicePaziente();
+            //return cadicePaziente();
+            return IBAN;
         }
-
-
     }
 }

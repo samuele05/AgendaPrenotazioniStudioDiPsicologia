@@ -65,78 +65,71 @@ namespace StudioPsicologia
         // bottone aggiungi paziente
         private void btnAggiungiPaziente_Click(object sender, EventArgs e)
         {
-            // definisci paziente
-            inizializzaPaziente();
-
-            // scrivi paziente
-            if (scriviPaziente())
+            if (inizializzaPaziente())
             {
-                MessageBox.Show("Aggiunto", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                // chiudi aggiunta medico
-                this.Close();
+                if (scriviPaz())
+                {
+                    MessageBox.Show("Aggiunto", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close();
+                }
+                else
+                    MessageBox.Show("Esiste già o tutti i campi non sono stati inseriti", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             else
-                MessageBox.Show("Esiste già o non è stao inserito nulla", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); 
+                MessageBox.Show("Inserire dei campi validi", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
         
 
-
-
-
-        // funzione inizializza medico
-        public void inizializzaPaziente()
+        // funzione inizializza paziente
+        public bool inizializzaPaziente()
         {
+            if (tbNomePaziente.Text == "" || tbCognomePaziente.Text == "" || tbIAggiungiIBAN.Text == "")
+                return false;
+
+            // definiscilo
             paziente._nome = tbNomePaziente.Text;
             paziente._cognome = tbCognomePaziente.Text;
-
             data();
             paziente._giornoNascita = giornoDiNascita;
             paziente._meseNascita = meseDiNascita;
             paziente._annoNascita = annoDiNascita;
-        }
+            paziente._IBAN = tbIAggiungiIBAN.Text.ToUpper();
 
-        // funzione scrivi medico
-        public bool scriviPaziente()
-        {
-            FileStream fs = new FileStream("Pazienti.bin", FileMode.OpenOrCreate);
-            BinaryWriter scrivi = new BinaryWriter(fs);
-            BinaryReader leggi = new BinaryReader(fs);
-
-
-
-
-
-            // leggere e definire il codice letto
-            string codiceLetto = "";
-
-            // codice medico è = a "" perchè il metodo non è ancora stato definito
-
-            if (tbNomePaziente.Text != "" && tbCognomePaziente.Text != "")
-            {
-                if (paziente.getCodice() != codiceLetto)
-                {
-                    scrivi.Write(paziente._nome);
-                    scrivi.Write(paziente._cognome);
-                    scrivi.Write(paziente._giornoNascita);
-                    scrivi.Write(paziente._meseNascita);
-                    scrivi.Write(paziente._annoNascita);
-                }
-                else
-                {
-                    fs.Close();
-                    return false;
-                }
-            }
-
-
-
-
-
-            fs.Close();
             return true;
         }
 
+
+        // funzione scrivi paziente
+        public bool scriviPaz()
+        {
+            if (!esiste(paziente))
+            {
+                paziente.scriviPaziente();
+                return true;
+            }
+            return false;
+        }
+
+
+        // funzione esiste
+        private bool esiste(Paziente paz)
+        {
+            FileStream fs = new FileStream("Pazienti.bin", FileMode.OpenOrCreate);
+            BinaryReader leggi = new BinaryReader(fs);
+
+            // leggo
+
+            //string codiceLetto = "";
+
+            //if (codiceLetto == paz.getCodice())
+            //{
+            //    fs.Close();
+            //    return true;
+            //}
+
+            fs.Close();
+            return false;
+        }
 
 
         // funzione data
@@ -152,6 +145,14 @@ namespace StudioPsicologia
 
 
 
+        // cose da fare
+        // aggiungere lettura pazienti per controllare che non esistano già
+
+
+
+
+
+
 
 
         // limitazioni textbox
@@ -162,6 +163,10 @@ namespace StudioPsicologia
         private void tbCognomePaziente_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar)) e.Handled = true;
+        }
+        private void tbIAggiungiIBAN_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && !char.IsLetter(e.KeyChar)) e.Handled = true;
         }
     }
 }
