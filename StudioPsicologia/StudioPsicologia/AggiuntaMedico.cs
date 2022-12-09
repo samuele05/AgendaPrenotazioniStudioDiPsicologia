@@ -50,6 +50,8 @@ namespace StudioPsicologia
             // bottoni
             btnAggiungiMedico.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, btnAggiungiMedico.Width, btnAggiungiMedico.Height, 10, 10));
         }
+
+        // medico
         Medico medico = new Medico();
 
 
@@ -137,8 +139,8 @@ namespace StudioPsicologia
 
 
 
-        // cose da fare
-        // aggiungere lettura medici per controllare che non esistano già
+        // COSE DA FARE
+        // aggiungere lettura medici per controllare che non esistino
 
 
 

@@ -47,60 +47,71 @@ namespace StudioPsicologia
             // 
             // tbCognomeMedico
             // 
+            this.tbCognomeMedico.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
             this.tbCognomeMedico.Location = new System.Drawing.Point(127, 60);
             this.tbCognomeMedico.Name = "tbCognomeMedico";
-            this.tbCognomeMedico.Size = new System.Drawing.Size(175, 20);
+            this.tbCognomeMedico.Size = new System.Drawing.Size(175, 22);
             this.tbCognomeMedico.TabIndex = 8;
             this.tbCognomeMedico.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbCognomeMedico_KeyPress);
             // 
             // tbNomeMedico
             // 
+            this.tbNomeMedico.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
             this.tbNomeMedico.Location = new System.Drawing.Point(127, 25);
             this.tbNomeMedico.Name = "tbNomeMedico";
-            this.tbNomeMedico.Size = new System.Drawing.Size(175, 20);
+            this.tbNomeMedico.Size = new System.Drawing.Size(175, 22);
             this.tbNomeMedico.TabIndex = 7;
             this.tbNomeMedico.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbNomeMedico_KeyPress);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(165)))), ((int)(((byte)(166)))));
             this.label2.Location = new System.Drawing.Point(23, 67);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(52, 13);
+            this.label2.Size = new System.Drawing.Size(57, 13);
             this.label2.TabIndex = 6;
             this.label2.Text = "Cognome";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(165)))), ((int)(((byte)(166)))));
             this.label1.Location = new System.Drawing.Point(23, 32);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.Size = new System.Drawing.Size(37, 13);
             this.label1.TabIndex = 5;
             this.label1.Text = "Nome";
             // 
             // tbSpecializzazioneMedico
             // 
+            this.tbSpecializzazioneMedico.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
             this.tbSpecializzazioneMedico.Location = new System.Drawing.Point(127, 95);
             this.tbSpecializzazioneMedico.Name = "tbSpecializzazioneMedico";
-            this.tbSpecializzazioneMedico.Size = new System.Drawing.Size(175, 20);
+            this.tbSpecializzazioneMedico.Size = new System.Drawing.Size(175, 22);
             this.tbSpecializzazioneMedico.TabIndex = 10;
             this.tbSpecializzazioneMedico.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSpecializzazioneMedico_KeyPress);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(165)))), ((int)(((byte)(166)))));
             this.label3.Location = new System.Drawing.Point(23, 102);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(85, 13);
+            this.label3.Size = new System.Drawing.Size(90, 13);
             this.label3.TabIndex = 9;
             this.label3.Text = "Specializzazione";
             // 
             // btnAggiungiMedico
             // 
-            this.btnAggiungiMedico.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.btnAggiungiMedico.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(93)))), ((int)(((byte)(114)))));
             this.btnAggiungiMedico.FlatAppearance.BorderSize = 0;
             this.btnAggiungiMedico.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAggiungiMedico.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
+            this.btnAggiungiMedico.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(165)))), ((int)(((byte)(166)))));
             this.btnAggiungiMedico.Location = new System.Drawing.Point(173, 162);
             this.btnAggiungiMedico.Name = "btnAggiungiMedico";
             this.btnAggiungiMedico.Size = new System.Drawing.Size(129, 55);
@@ -112,48 +123,57 @@ namespace StudioPsicologia
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(165)))), ((int)(((byte)(166)))));
             this.label4.Location = new System.Drawing.Point(23, 138);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 13);
+            this.label4.Size = new System.Drawing.Size(40, 13);
             this.label4.TabIndex = 12;
             this.label4.Text = "Orario";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
+            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(165)))), ((int)(((byte)(166)))));
             this.label5.Location = new System.Drawing.Point(23, 166);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(31, 13);
+            this.label5.Size = new System.Drawing.Size(35, 13);
             this.label5.TabIndex = 13;
             this.label5.Text = "Inizio";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
+            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(165)))), ((int)(((byte)(166)))));
             this.label6.Location = new System.Drawing.Point(23, 199);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(27, 13);
+            this.label6.Size = new System.Drawing.Size(29, 13);
             this.label6.TabIndex = 14;
             this.label6.Text = "Fine";
             // 
             // nudInizioOrario
             // 
+            this.nudInizioOrario.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
             this.nudInizioOrario.Location = new System.Drawing.Point(69, 164);
             this.nudInizioOrario.Name = "nudInizioOrario";
-            this.nudInizioOrario.Size = new System.Drawing.Size(74, 20);
+            this.nudInizioOrario.Size = new System.Drawing.Size(74, 22);
             this.nudInizioOrario.TabIndex = 15;
             // 
             // nudFineOrario
             // 
+            this.nudFineOrario.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
             this.nudFineOrario.Location = new System.Drawing.Point(69, 197);
             this.nudFineOrario.Name = "nudFineOrario";
-            this.nudFineOrario.Size = new System.Drawing.Size(74, 20);
+            this.nudFineOrario.Size = new System.Drawing.Size(74, 22);
             this.nudFineOrario.TabIndex = 16;
             // 
             // AggiuntaMedico
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
             this.ClientSize = new System.Drawing.Size(333, 246);
             this.Controls.Add(this.nudInizioOrario);
             this.Controls.Add(this.nudFineOrario);
@@ -167,9 +187,12 @@ namespace StudioPsicologia
             this.Controls.Add(this.tbNomeMedico);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "AggiuntaMedico";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "AggiuntaMedico";
+            this.Text = "Aggiunta medico";
             this.Load += new System.EventHandler(this.AggiuntaMedico_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudInizioOrario)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudFineOrario)).EndInit();

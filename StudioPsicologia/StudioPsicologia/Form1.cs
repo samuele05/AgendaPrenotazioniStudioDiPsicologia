@@ -58,10 +58,17 @@ namespace StudioPsicologia
             // pannelli
             plInformazioniAppuntamento.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, plInformazioniAppuntamento.Width, plInformazioniAppuntamento.Height, 10, 10));
             plAppuntamento.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, plAppuntamento.Width, plAppuntamento.Height, 10, 10));
+            plArgomento.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, plArgomento.Width, plArgomento.Height, 10, 10));
+
+
 
             // carica pazienti
             caricaPazienti();
             caricaCbPazienti();
+
+
+
+
         }
 
 
@@ -170,6 +177,14 @@ namespace StudioPsicologia
 
 
 
+        // COSE DA FARE
+        // ricordati di ricaricare pazienti, medici e appuntamenti quando si chiude un form di aggiunta
+        // trovare un modo per definire la data e ora dell'appuntamento
+        // caricare nella lista appuntamenti gli appuntamenti una volta riaperto il programma
+        // sistemare funzione carica pazienti e medici
+        // vedere la questione degli orari di apertura dato che per ora i medici possono lavorare dalle 0 alle 23
+        // aggiungere lettura file ed eventuali controlli di esistenza degli appuntamenti
+        // lorario dell'appuntamento deve essere consono con quello dei medici e degli appuntamenti esistenti
 
 
 

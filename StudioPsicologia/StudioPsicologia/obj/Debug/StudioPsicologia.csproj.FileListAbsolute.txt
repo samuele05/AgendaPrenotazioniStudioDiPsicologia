@@ -4,10 +4,10 @@ C:\Users\samug\source\repos\StudioPsicologia\StudioPsicologia\bin\Debug\StudioPs
 C:\Users\samug\source\repos\StudioPsicologia\StudioPsicologia\obj\Debug\StudioPsicologia.csproj.AssemblyReference.cache
 C:\Users\samug\source\repos\StudioPsicologia\StudioPsicologia\obj\Debug\StudioPsicologia.AggiuntaMedico.resources
 C:\Users\samug\source\repos\StudioPsicologia\StudioPsicologia\obj\Debug\StudioPsicologia.AggiuntaPaziente.resources
-C:\Users\samug\source\repos\StudioPsicologia\StudioPsicologia\obj\Debug\StudioPsicologia.Form1.resources
 C:\Users\samug\source\repos\StudioPsicologia\StudioPsicologia\obj\Debug\StudioPsicologia.Properties.Resources.resources
 C:\Users\samug\source\repos\StudioPsicologia\StudioPsicologia\obj\Debug\StudioPsicologia.csproj.GenerateResource.cache
 C:\Users\samug\source\repos\StudioPsicologia\StudioPsicologia\obj\Debug\StudioPsicologia.csproj.CoreCompileInputs.cache
 C:\Users\samug\source\repos\StudioPsicologia\StudioPsicologia\obj\Debug\StudioPsicologia.exe
 C:\Users\samug\source\repos\StudioPsicologia\StudioPsicologia\obj\Debug\StudioPsicologia.pdb
 C:\Users\samug\source\repos\StudioPsicologia\StudioPsicologia\obj\Debug\StudioPsicologia.RimuoviMedico.resources
+C:\Users\samug\source\repos\StudioPsicologia\StudioPsicologia\obj\Debug\StudioPsicologia.Form1.resources

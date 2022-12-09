@@ -83,6 +83,7 @@ namespace StudioPsicologia
         // funzione inizializza paziente
         public bool inizializzaPaziente()
         {
+            // verifica che tutti i campi sono stati inseriti
             if (tbNomePaziente.Text == "" || tbCognomePaziente.Text == "" || tbIAggiungiIBAN.Text == "")
                 return false;
 
@@ -93,6 +94,11 @@ namespace StudioPsicologia
             paziente._giornoNascita = giornoDiNascita;
             paziente._meseNascita = meseDiNascita;
             paziente._annoNascita = annoDiNascita;
+
+            // verifica che l'iban sia di 27 caratteri
+            if (tbIAggiungiIBAN.Text.Length != 27)
+                return false;
+
             paziente._IBAN = tbIAggiungiIBAN.Text.ToUpper();
 
             return true;
@@ -145,8 +151,8 @@ namespace StudioPsicologia
 
 
 
-        // cose da fare
-        // aggiungere lettura pazienti per controllare che non esistano già
+        // COSE DA FARE
+        // aggiungere lettura pazienti per controllare che non esistino
 
 
 

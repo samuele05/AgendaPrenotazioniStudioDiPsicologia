@@ -42,13 +42,6 @@ namespace StudioPsicologia
         public Medico() : this("Medico", "Medico", "//", false, 0, 0) { }
 
 
-        // override ToString
-        public override string ToString()
-        {
-            return base.ToString(); // sistemare
-        }
-
-
         //// restituisce la quantità di byte occupata dal Medico nel file binario
         //public int getByte()
         //{
@@ -80,9 +73,19 @@ namespace StudioPsicologia
         {
             FileStream fs = new FileStream("Medici.bin", FileMode.OpenOrCreate);
             BinaryWriter scrivi = new BinaryWriter(fs);
-            //BinaryReader leggi = new BinaryReader(fs);
 
-            // faccio belle cose
+            fs.Seek(0, SeekOrigin.End);       // chiedere se va bene
+
+            scrivi.Write(formattaStringa(nome));
+            scrivi.Write(formattaStringa(cognome));
+            scrivi.Write(formattaStringa(specializzazione));
+            scrivi.Write(inCarica);
+            scrivi.Write(inizioOrario);
+            scrivi.Write(fineOrario);
+
+            scrivi.Write(getCodice());
+
+            fs.Close();
         }
 
 

@@ -41,13 +41,6 @@ namespace StudioPsicologia
         public Paziente() : this( "Paziente", "Paziente", DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year, "IBAN") { }
 
 
-        // override ToString
-        public override string ToString()
-        {
-            return base.ToString(); // sistemare
-        }
-
-
         //// restituisce la quantità di byte occupata dal paziente nel file binario
         //public int getByte()
         //{
@@ -80,7 +73,7 @@ namespace StudioPsicologia
             scrivi.Write(meseNascita);
             scrivi.Write(annoNascita);
 
-            scrivi.Write(getCodice());
+            scrivi.Write(IBAN);
 
             fs.Close();
         }
