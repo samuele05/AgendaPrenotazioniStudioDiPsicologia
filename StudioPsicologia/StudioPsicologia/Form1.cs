@@ -37,13 +37,7 @@ namespace StudioPsicologia
 
 
 
-
-
-
-
-
-
-
+        // ----------------------------------------------------------------------------------------------------
 
 
 
@@ -61,14 +55,8 @@ namespace StudioPsicologia
             plArgomento.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, plArgomento.Width, plArgomento.Height, 10, 10));
 
 
-
-            // carica pazienti
-            caricaPazienti();
-            caricaCbPazienti();
-
-
-
-
+            // funzione start
+            start();
         }
 
 
@@ -83,42 +71,134 @@ namespace StudioPsicologia
         // liste
         List<Medico> medici = new List<Medico>();
         List<Paziente> pazienti = new List<Paziente>();
-        List<Appuntamento> appuntamenti = new List<Appuntamento>();
 
+        public int apertura = 8;
+        public int chiusura = 18;
 
+        Studio studio = new Studio();
 
-
-        public void caricaMedici()
+        // def orari 
+        public void definisciOrariStudio()
         {
-
+            studio._orarioApertura = apertura;
+            studio._orarioChiusura = chiusura;
         }
 
 
-        // funzione carica pazienti leggendo da file
-        public void caricaPazienti()   // creare un paziente prima di caricarli + fare in modo che legga tutti i pazienti
+        // funzione start
+        public void start()
         {
-            FileStream fs = new FileStream("Pazienti.bin", FileMode.OpenOrCreate);
+            // carica pazienti
+            caricaPazienti();
+            caricaCbPazienti();
+
+            // carica medici
+            caricaMedici();
+            caricaCbMedici();
+
+            // studio
+            definisciOrariStudio();
+            caricaAppuntamenti();
+        }
+
+
+        // funzione carica medici leggendo da file
+        public void caricaAppuntamenti()
+        {
+            FileStream fs = new FileStream("Appuntamenti.bin", FileMode.OpenOrCreate);
             BinaryReader leggi = new BinaryReader(fs);
 
-            Paziente paz = new Paziente();
+            while (fs.Position < fs.Length)
+            {
+                Appuntamento app = new Appuntamento();
 
-            //paz._nome = leggi.ReadString();
-            //paz._cognome = leggi.ReadString();
+                app._medico = cercaMedico(leggi.ReadString());
+                app._paziente = cercaPaziente(leggi.ReadString());
+                app._data = leggi.ReadString();
+                app._argomento = leggi.ReadString();
+                app._orario = leggi.ReadInt32();
 
-            //paz._giornoNascita = leggi.ReadInt32();
-            //paz._meseNascita = leggi.ReadInt32();
-            //paz._annoNascita = leggi.ReadInt32();
-
-            //paz._IBAN = leggi.ReadString();
-
-            //pazienti.Add(paz);
-
+                studio.aggiungiAppuntamento(app);
+            }
             fs.Close();
         }
 
 
+        // funzione cerca medico
+        private Medico cercaMedico(string codiceMedico)
+        {
+            Medico med = new Medico();
+            for (int i = 0; i < medici.Count; i++)
+                if (medici[i].getCodice() == codiceMedico)
+                    med = medici[i];
+            return med;
+        }
 
 
+        // funzione cerca paziente
+        private Paziente cercaPaziente(string codiceMedico)
+        {
+            Paziente paz = new Paziente();
+            for (int i = 0; i < pazienti.Count; i++)
+                if (pazienti[i].getCodice() == codiceMedico)
+                    paz = pazienti[i];
+            return paz;
+        }
+
+
+
+
+
+
+
+
+
+        // funzione carica medici leggendo da file
+        public void caricaMedici()
+        {
+            FileStream fs = new FileStream("Medici.bin", FileMode.OpenOrCreate);
+            BinaryReader leggi = new BinaryReader(fs);
+
+            while (fs.Position < fs.Length)
+            {
+                Medico med = new Medico();
+
+                med._nome = leggi.ReadString().Trim(' ');
+                med._cognome = leggi.ReadString().Trim(' ');
+                med._specializzazione = leggi.ReadString().Trim(' ');
+                med._inCarica = leggi.ReadBoolean();
+                med._inizioOrario = leggi.ReadInt32();
+                med._fineOrario = leggi.ReadInt32();
+
+                fs.Seek(11, SeekOrigin.Current);
+
+                medici.Add(med);
+            }
+            fs.Close();
+        }
+
+
+        // funzione carica pazienti leggendo da file
+        public void caricaPazienti()
+        {
+            FileStream fs = new FileStream("Pazienti.bin", FileMode.OpenOrCreate);
+            BinaryReader leggi = new BinaryReader(fs);
+
+            while (fs.Position < fs.Length)
+            {
+                Paziente paz = new Paziente();
+
+                paz._nome = leggi.ReadString().Trim(' ');
+                paz._cognome = leggi.ReadString().Trim(' ');
+                paz._giornoNascita = leggi.ReadInt32();
+                paz._meseNascita = leggi.ReadInt32();
+                paz._annoNascita = leggi.ReadInt32();
+                paz._IBAN = leggi.ReadString();
+
+                pazienti.Add(paz);
+            }
+            fs.Close();
+        }
 
 
         // funzione carica pazienti nelle combo box
@@ -138,20 +218,15 @@ namespace StudioPsicologia
 
 
 
-
-
-
         // bottone aggiungi appuntamento
-        private void btnAggiungiAppuntamento_Click(object sender, EventArgs e) // verificare che l'appuntamento non esista già
+        private void btnAggiungiAppuntamento_Click(object sender, EventArgs e)
         {
-            Appuntamento app = new Appuntamento();
-
             // definisci appuntamento
             if (cbPazienti.Text != "" && cbMedici.Text != "")
             {
+                Appuntamento app = new Appuntamento();
                 string codicePaziente = cbPazienti.SelectedItem.ToString().Split(' ')[2];
                 string codiceMedico = cbMedici.SelectedItem.ToString().Split(' ')[2];
-
 
                 // definisci paziente
                 for (int i = 0; i < pazienti.Count; i++)
@@ -164,11 +239,15 @@ namespace StudioPsicologia
                         app._medico = medici[i];
 
                 // definisci data
-                // cose belle
+                app._data = dtpDataAppuntamento.Text;
+                app._orario = Convert.ToInt32(nudOrario.Value);
 
                 // definisci argomento
                 app._argomento = tbArgomentoAppuntamento.Text;
 
+                // aggiungi appuntamento
+                studio.aggiungiAppuntamento(app);
+                app.scriviAppuntemento();
             }
             else
                 MessageBox.Show("Tutti i campi non sono stati inseriti", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -176,33 +255,33 @@ namespace StudioPsicologia
 
 
 
-
         // COSE DA FARE
+
         // ricordati di ricaricare pazienti, medici e appuntamenti quando si chiude un form di aggiunta
-        // trovare un modo per definire la data e ora dell'appuntamento
-        // caricare nella lista appuntamenti gli appuntamenti una volta riaperto il programma
-        // sistemare funzione carica pazienti e medici
-        // vedere la questione degli orari di apertura dato che per ora i medici possono lavorare dalle 0 alle 23
+
         // aggiungere lettura file ed eventuali controlli di esistenza degli appuntamenti
+
         // lorario dell'appuntamento deve essere consono con quello dei medici e degli appuntamenti esistenti
 
+        // fare in modo di visualizzare gli appuntamenti e modificarli
 
 
 
+        // ----------------------------------------------------------------------------------------------------
 
 
+
+        // limitazioni textbox
         private void btnAggiungiPaziente_Click(object sender, EventArgs e)
         {
             AggiuntaPaziente aggiuntaPaziente = new AggiuntaPaziente();
             aggiuntaPaziente.ShowDialog();
         }
-
         private void btnAggiungiMedico_Click(object sender, EventArgs e)
         {
             AggiuntaMedico aggiuntaMedico = new AggiuntaMedico();
             aggiuntaMedico.ShowDialog();
         }
-
         private void btnRimuoviMedico_Click(object sender, EventArgs e)
         {
             RimuoviMedico rimuoviMedico = new RimuoviMedico();

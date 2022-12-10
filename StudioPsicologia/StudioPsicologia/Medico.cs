@@ -67,7 +67,7 @@ namespace StudioPsicologia
             FileStream fs = new FileStream("Medici.bin", FileMode.OpenOrCreate);
             BinaryWriter scrivi = new BinaryWriter(fs);
 
-            fs.Seek(0, SeekOrigin.End);       // chiedere se va bene
+            fs.Seek(0, SeekOrigin.End);
 
             scrivi.Write(formattaStringa(nome));        // lunghezza 20
             scrivi.Write(formattaStringa(cognome));

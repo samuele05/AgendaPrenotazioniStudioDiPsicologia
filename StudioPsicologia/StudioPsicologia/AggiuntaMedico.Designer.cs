@@ -155,6 +155,7 @@ namespace StudioPsicologia
             // 
             // nudInizioOrario
             // 
+            this.nudInizioOrario.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.nudInizioOrario.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
             this.nudInizioOrario.Location = new System.Drawing.Point(69, 164);
             this.nudInizioOrario.Name = "nudInizioOrario";
@@ -163,6 +164,7 @@ namespace StudioPsicologia
             // 
             // nudFineOrario
             // 
+            this.nudFineOrario.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.nudFineOrario.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
             this.nudFineOrario.Location = new System.Drawing.Point(69, 197);
             this.nudFineOrario.Name = "nudFineOrario";

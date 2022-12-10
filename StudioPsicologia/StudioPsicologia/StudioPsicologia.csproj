@@ -75,6 +75,7 @@
     <Compile Include="RimuoviMedico.Designer.cs">
       <DependentUpon>RimuoviMedico.cs</DependentUpon>
     </Compile>
+    <Compile Include="Studio.cs" />
     <EmbeddedResource Include="AggiuntaMedico.resx">
       <DependentUpon>AggiuntaMedico.cs</DependentUpon>
     </EmbeddedResource>

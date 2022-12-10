@@ -66,6 +66,9 @@ namespace StudioPsicologia
                 MessageBox.Show("Inserire dei campi validi", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
+        int apertura = Form1.instance.apertura;
+        int chiusura = Form1.instance.chiusura;
+
 
         // inizializza medico
         public bool inizializzaMedico()
@@ -81,7 +84,7 @@ namespace StudioPsicologia
             int inizio = Convert.ToInt32(nudInizioOrario.Value);
             int fine = Convert.ToInt32(nudFineOrario.Value);
 
-            if (inizio >= 0 && inizio < 23 && fine > 0 && fine <= 23)
+            if (inizio >= apertura && inizio < chiusura && fine > apertura && fine <= chiusura)
             {
                 if (inizio < fine)
                 {

@@ -34,23 +34,34 @@ namespace StudioPsicologia
         public Appuntamento() : this(new Medico(), new Paziente(), "", "", 0) { }
 
 
-
+        // funzione scrivi appuntamento
         public void scriviAppuntemento()
         {
-            FileStream fs = new FileStream("Pazienti.bin", FileMode.OpenOrCreate);
+            FileStream fs = new FileStream("Appuntamenti.bin", FileMode.OpenOrCreate);
             BinaryWriter scrivi = new BinaryWriter(fs);
 
-            fs.Seek(0, SeekOrigin.End);       // chiedere se va bene
+            fs.Seek(0, SeekOrigin.End);
 
             scrivi.Write(medico.getCodice());
             scrivi.Write(paziente.getCodice());
-
-            scrivi.Write(formattaStringa(data));  // da sistemare
+            scrivi.Write(data);
             scrivi.Write(formattaStringa(argomento));
-
-            scrivi.Write(formattaNumero(orario));
+            scrivi.Write(orario);
 
             fs.Close();
+        }
+
+        
+        // codice appuntameto (utile per la eliminare e modificare appuntamenti)
+        public string codiceAppuntamento()
+        {
+            string codiceAppuntamento =
+                $"{medico.getCodice()}" +
+                $"{paziente.getCodice()}" +
+                $"{data}" +
+                $"{formattaNumero(orario)}";
+
+            return codiceAppuntamento;
         }
 
 

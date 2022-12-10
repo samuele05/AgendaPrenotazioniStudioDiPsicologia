@@ -42,10 +42,13 @@ namespace StudioPsicologia
             this.label4 = new System.Windows.Forms.Label();
             this.tbArgomentoAppuntamento = new System.Windows.Forms.TextBox();
             this.plAppuntamento = new System.Windows.Forms.Panel();
-            this.label5 = new System.Windows.Forms.Label();
             this.plArgomento = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.nudOrario = new System.Windows.Forms.NumericUpDown();
+            this.dtpDataAppuntamento = new System.Windows.Forms.DateTimePicker();
             this.plAppuntamento.SuspendLayout();
             this.plArgomento.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudOrario)).BeginInit();
             this.SuspendLayout();
             // 
             // btnAggiungiPaziente
@@ -100,9 +103,9 @@ namespace StudioPsicologia
             this.btnAggiungiAppuntamento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAggiungiAppuntamento.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
             this.btnAggiungiAppuntamento.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(165)))), ((int)(((byte)(166)))));
-            this.btnAggiungiAppuntamento.Location = new System.Drawing.Point(29, 321);
+            this.btnAggiungiAppuntamento.Location = new System.Drawing.Point(29, 301);
             this.btnAggiungiAppuntamento.Name = "btnAggiungiAppuntamento";
-            this.btnAggiungiAppuntamento.Size = new System.Drawing.Size(279, 59);
+            this.btnAggiungiAppuntamento.Size = new System.Drawing.Size(301, 59);
             this.btnAggiungiAppuntamento.TabIndex = 3;
             this.btnAggiungiAppuntamento.Text = "Aggiungi appuntamento";
             this.btnAggiungiAppuntamento.UseVisualStyleBackColor = false;
@@ -111,30 +114,32 @@ namespace StudioPsicologia
             // plInformazioniAppuntamento
             // 
             this.plInformazioniAppuntamento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(52)))), ((int)(((byte)(70)))));
-            this.plInformazioniAppuntamento.Location = new System.Drawing.Point(345, 172);
+            this.plInformazioniAppuntamento.Location = new System.Drawing.Point(365, 172);
             this.plInformazioniAppuntamento.Name = "plInformazioniAppuntamento";
-            this.plInformazioniAppuntamento.Size = new System.Drawing.Size(264, 350);
+            this.plInformazioniAppuntamento.Size = new System.Drawing.Size(244, 330);
             this.plInformazioniAppuntamento.TabIndex = 12;
             // 
             // cbMedici
             // 
             this.cbMedici.BackColor = System.Drawing.SystemColors.Window;
+            this.cbMedici.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbMedici.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
             this.cbMedici.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
             this.cbMedici.FormattingEnabled = true;
-            this.cbMedici.Location = new System.Drawing.Point(109, 93);
+            this.cbMedici.Location = new System.Drawing.Point(99, 93);
             this.cbMedici.Name = "cbMedici";
-            this.cbMedici.Size = new System.Drawing.Size(199, 21);
+            this.cbMedici.Size = new System.Drawing.Size(228, 21);
             this.cbMedici.TabIndex = 13;
             // 
             // cbPazienti
             // 
+            this.cbPazienti.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbPazienti.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
             this.cbPazienti.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
             this.cbPazienti.FormattingEnabled = true;
-            this.cbPazienti.Location = new System.Drawing.Point(109, 120);
+            this.cbPazienti.Location = new System.Drawing.Point(99, 120);
             this.cbPazienti.Name = "cbPazienti";
-            this.cbPazienti.Size = new System.Drawing.Size(199, 21);
+            this.cbPazienti.Size = new System.Drawing.Size(228, 21);
             this.cbPazienti.TabIndex = 14;
             // 
             // label1
@@ -176,7 +181,7 @@ namespace StudioPsicologia
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(165)))), ((int)(((byte)(166)))));
-            this.label4.Location = new System.Drawing.Point(26, 195);
+            this.label4.Location = new System.Drawing.Point(26, 192);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(65, 13);
             this.label4.TabIndex = 18;
@@ -188,15 +193,17 @@ namespace StudioPsicologia
             this.tbArgomentoAppuntamento.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tbArgomentoAppuntamento.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
             this.tbArgomentoAppuntamento.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(165)))), ((int)(((byte)(166)))));
-            this.tbArgomentoAppuntamento.Location = new System.Drawing.Point(6, 17);
+            this.tbArgomentoAppuntamento.Location = new System.Drawing.Point(5, 17);
             this.tbArgomentoAppuntamento.Multiline = true;
             this.tbArgomentoAppuntamento.Name = "tbArgomentoAppuntamento";
-            this.tbArgomentoAppuntamento.Size = new System.Drawing.Size(171, 70);
+            this.tbArgomentoAppuntamento.Size = new System.Drawing.Size(223, 70);
             this.tbArgomentoAppuntamento.TabIndex = 19;
             // 
             // plAppuntamento
             // 
             this.plAppuntamento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.plAppuntamento.Controls.Add(this.dtpDataAppuntamento);
+            this.plAppuntamento.Controls.Add(this.nudOrario);
             this.plAppuntamento.Controls.Add(this.cbMedici);
             this.plAppuntamento.Controls.Add(this.plArgomento);
             this.plAppuntamento.Controls.Add(this.label5);
@@ -208,8 +215,17 @@ namespace StudioPsicologia
             this.plAppuntamento.Controls.Add(this.label2);
             this.plAppuntamento.Location = new System.Drawing.Point(12, 142);
             this.plAppuntamento.Name = "plAppuntamento";
-            this.plAppuntamento.Size = new System.Drawing.Size(621, 408);
+            this.plAppuntamento.Size = new System.Drawing.Size(621, 385);
             this.plAppuntamento.TabIndex = 13;
+            // 
+            // plArgomento
+            // 
+            this.plArgomento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(52)))), ((int)(((byte)(70)))));
+            this.plArgomento.Controls.Add(this.tbArgomentoAppuntamento);
+            this.plArgomento.Location = new System.Drawing.Point(99, 175);
+            this.plArgomento.Name = "plArgomento";
+            this.plArgomento.Size = new System.Drawing.Size(229, 100);
+            this.plArgomento.TabIndex = 13;
             // 
             // label5
             // 
@@ -222,21 +238,30 @@ namespace StudioPsicologia
             this.label5.TabIndex = 20;
             this.label5.Text = "Orario";
             // 
-            // plArgomento
+            // nudOrario
             // 
-            this.plArgomento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(52)))), ((int)(((byte)(70)))));
-            this.plArgomento.Controls.Add(this.tbArgomentoAppuntamento);
-            this.plArgomento.Location = new System.Drawing.Point(109, 195);
-            this.plArgomento.Name = "plArgomento";
-            this.plArgomento.Size = new System.Drawing.Size(199, 100);
-            this.plArgomento.TabIndex = 13;
+            this.nudOrario.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.nudOrario.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
+            this.nudOrario.Location = new System.Drawing.Point(99, 147);
+            this.nudOrario.Name = "nudOrario";
+            this.nudOrario.Size = new System.Drawing.Size(80, 22);
+            this.nudOrario.TabIndex = 21;
+            // 
+            // dtpDataAppuntamento
+            // 
+            this.dtpDataAppuntamento.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
+            this.dtpDataAppuntamento.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpDataAppuntamento.Location = new System.Drawing.Point(185, 147);
+            this.dtpDataAppuntamento.Name = "dtpDataAppuntamento";
+            this.dtpDataAppuntamento.Size = new System.Drawing.Size(142, 22);
+            this.dtpDataAppuntamento.TabIndex = 22;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.ClientSize = new System.Drawing.Size(649, 566);
+            this.ClientSize = new System.Drawing.Size(649, 543);
             this.Controls.Add(this.plInformazioniAppuntamento);
             this.Controls.Add(this.btnRimuoviMedico);
             this.Controls.Add(this.btnAggiungiMedico);
@@ -253,6 +278,7 @@ namespace StudioPsicologia
             this.plAppuntamento.PerformLayout();
             this.plArgomento.ResumeLayout(false);
             this.plArgomento.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudOrario)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -274,6 +300,8 @@ namespace StudioPsicologia
         private System.Windows.Forms.Panel plAppuntamento;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel plArgomento;
+        private System.Windows.Forms.NumericUpDown nudOrario;
+        private System.Windows.Forms.DateTimePicker dtpDataAppuntamento;
     }
 }
 
