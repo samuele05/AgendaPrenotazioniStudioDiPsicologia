@@ -32,18 +32,6 @@ namespace StudioPsicologia
             this.tbCodiceMedico = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnRimuoviMedico = new System.Windows.Forms.Button();
-            this.plInformazioniMedico = new System.Windows.Forms.Panel();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.lblInCarica = new System.Windows.Forms.Label();
-            this.lblSpecializzazioneMedico = new System.Windows.Forms.Label();
-            this.lblCognomeMedico = new System.Windows.Forms.Label();
-            this.lblNomeMedico = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.btnSelezionaMedico = new System.Windows.Forms.Button();
-            this.plInformazioniMedico.SuspendLayout();
             this.SuspendLayout();
             // 
             // tbCodiceMedico
@@ -51,7 +39,7 @@ namespace StudioPsicologia
             this.tbCodiceMedico.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
             this.tbCodiceMedico.Location = new System.Drawing.Point(23, 50);
             this.tbCodiceMedico.Name = "tbCodiceMedico";
-            this.tbCodiceMedico.Size = new System.Drawing.Size(172, 22);
+            this.tbCodiceMedico.Size = new System.Drawing.Size(236, 22);
             this.tbCodiceMedico.TabIndex = 9;
             this.tbCodiceMedico.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbCodiceMedico_KeyPress);
             // 
@@ -73,153 +61,20 @@ namespace StudioPsicologia
             this.btnRimuoviMedico.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRimuoviMedico.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
             this.btnRimuoviMedico.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(165)))), ((int)(((byte)(166)))));
-            this.btnRimuoviMedico.Location = new System.Drawing.Point(23, 289);
+            this.btnRimuoviMedico.Location = new System.Drawing.Point(22, 95);
             this.btnRimuoviMedico.Name = "btnRimuoviMedico";
-            this.btnRimuoviMedico.Size = new System.Drawing.Size(310, 50);
+            this.btnRimuoviMedico.Size = new System.Drawing.Size(237, 50);
             this.btnRimuoviMedico.TabIndex = 10;
             this.btnRimuoviMedico.Text = "Rimuovi medico";
             this.btnRimuoviMedico.UseVisualStyleBackColor = false;
             this.btnRimuoviMedico.Click += new System.EventHandler(this.btnRimuoviMedico_Click);
-            // 
-            // plInformazioniMedico
-            // 
-            this.plInformazioniMedico.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(52)))), ((int)(((byte)(70)))));
-            this.plInformazioniMedico.Controls.Add(this.label6);
-            this.plInformazioniMedico.Controls.Add(this.label5);
-            this.plInformazioniMedico.Controls.Add(this.label4);
-            this.plInformazioniMedico.Controls.Add(this.label3);
-            this.plInformazioniMedico.Controls.Add(this.lblInCarica);
-            this.plInformazioniMedico.Controls.Add(this.lblSpecializzazioneMedico);
-            this.plInformazioniMedico.Controls.Add(this.lblCognomeMedico);
-            this.plInformazioniMedico.Controls.Add(this.lblNomeMedico);
-            this.plInformazioniMedico.Location = new System.Drawing.Point(23, 122);
-            this.plInformazioniMedico.Name = "plInformazioniMedico";
-            this.plInformazioniMedico.Size = new System.Drawing.Size(310, 143);
-            this.plInformazioniMedico.TabIndex = 11;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
-            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(165)))), ((int)(((byte)(166)))));
-            this.label6.Location = new System.Drawing.Point(18, 115);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(52, 13);
-            this.label6.TabIndex = 20;
-            this.label6.Text = "In carica:";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
-            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(165)))), ((int)(((byte)(166)))));
-            this.label5.Location = new System.Drawing.Point(18, 84);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(93, 13);
-            this.label5.TabIndex = 19;
-            this.label5.Text = "Specializzazione:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
-            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(165)))), ((int)(((byte)(166)))));
-            this.label4.Location = new System.Drawing.Point(18, 52);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(60, 13);
-            this.label4.TabIndex = 18;
-            this.label4.Text = "Cognome:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(165)))), ((int)(((byte)(166)))));
-            this.label3.Location = new System.Drawing.Point(18, 19);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(40, 13);
-            this.label3.TabIndex = 17;
-            this.label3.Text = "Nome:";
-            // 
-            // lblInCarica
-            // 
-            this.lblInCarica.AutoSize = true;
-            this.lblInCarica.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
-            this.lblInCarica.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(165)))), ((int)(((byte)(166)))));
-            this.lblInCarica.Location = new System.Drawing.Point(121, 115);
-            this.lblInCarica.Name = "lblInCarica";
-            this.lblInCarica.Size = new System.Drawing.Size(61, 13);
-            this.lblInCarica.TabIndex = 16;
-            this.lblInCarica.Text = "lblInCarica";
-            // 
-            // lblSpecializzazioneMedico
-            // 
-            this.lblSpecializzazioneMedico.AutoSize = true;
-            this.lblSpecializzazioneMedico.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
-            this.lblSpecializzazioneMedico.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(165)))), ((int)(((byte)(166)))));
-            this.lblSpecializzazioneMedico.Location = new System.Drawing.Point(121, 84);
-            this.lblSpecializzazioneMedico.Name = "lblSpecializzazioneMedico";
-            this.lblSpecializzazioneMedico.Size = new System.Drawing.Size(141, 13);
-            this.lblSpecializzazioneMedico.TabIndex = 15;
-            this.lblSpecializzazioneMedico.Text = "lblSpecializzazioneMedico";
-            // 
-            // lblCognomeMedico
-            // 
-            this.lblCognomeMedico.AutoSize = true;
-            this.lblCognomeMedico.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
-            this.lblCognomeMedico.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(165)))), ((int)(((byte)(166)))));
-            this.lblCognomeMedico.Location = new System.Drawing.Point(121, 52);
-            this.lblCognomeMedico.Name = "lblCognomeMedico";
-            this.lblCognomeMedico.Size = new System.Drawing.Size(108, 13);
-            this.lblCognomeMedico.TabIndex = 14;
-            this.lblCognomeMedico.Text = "lblCognomeMedico";
-            // 
-            // lblNomeMedico
-            // 
-            this.lblNomeMedico.AutoSize = true;
-            this.lblNomeMedico.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
-            this.lblNomeMedico.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(165)))), ((int)(((byte)(166)))));
-            this.lblNomeMedico.Location = new System.Drawing.Point(121, 19);
-            this.lblNomeMedico.Name = "lblNomeMedico";
-            this.lblNomeMedico.Size = new System.Drawing.Size(88, 13);
-            this.lblNomeMedico.TabIndex = 13;
-            this.lblNomeMedico.Text = "lblNomeMedico";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(165)))), ((int)(((byte)(166)))));
-            this.label2.Location = new System.Drawing.Point(20, 97);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(112, 13);
-            this.label2.TabIndex = 12;
-            this.label2.Text = "Informazioni medico";
-            // 
-            // btnSelezionaMedico
-            // 
-            this.btnSelezionaMedico.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(93)))), ((int)(((byte)(114)))));
-            this.btnSelezionaMedico.FlatAppearance.BorderSize = 0;
-            this.btnSelezionaMedico.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSelezionaMedico.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
-            this.btnSelezionaMedico.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(165)))), ((int)(((byte)(166)))));
-            this.btnSelezionaMedico.Location = new System.Drawing.Point(230, 32);
-            this.btnSelezionaMedico.Name = "btnSelezionaMedico";
-            this.btnSelezionaMedico.Size = new System.Drawing.Size(103, 63);
-            this.btnSelezionaMedico.TabIndex = 13;
-            this.btnSelezionaMedico.Text = "Seleziona";
-            this.btnSelezionaMedico.UseVisualStyleBackColor = false;
-            this.btnSelezionaMedico.Click += new System.EventHandler(this.btnSelezionaMedico_Click);
             // 
             // RimuoviMedico
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.ClientSize = new System.Drawing.Size(359, 365);
-            this.Controls.Add(this.btnSelezionaMedico);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.plInformazioniMedico);
+            this.ClientSize = new System.Drawing.Size(286, 172);
             this.Controls.Add(this.btnRimuoviMedico);
             this.Controls.Add(this.tbCodiceMedico);
             this.Controls.Add(this.label1);
@@ -230,8 +85,6 @@ namespace StudioPsicologia
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "RimuoviMedico";
             this.Load += new System.EventHandler(this.RimuoviMedico_Load);
-            this.plInformazioniMedico.ResumeLayout(false);
-            this.plInformazioniMedico.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -242,16 +95,5 @@ namespace StudioPsicologia
         private System.Windows.Forms.TextBox tbCodiceMedico;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnRimuoviMedico;
-        private System.Windows.Forms.Panel plInformazioniMedico;
-        private System.Windows.Forms.Label lblInCarica;
-        private System.Windows.Forms.Label lblSpecializzazioneMedico;
-        private System.Windows.Forms.Label lblCognomeMedico;
-        private System.Windows.Forms.Label lblNomeMedico;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button btnSelezionaMedico;
     }
 }

@@ -45,7 +45,7 @@ namespace StudioPsicologia
             scrivi.Write(medico.getCodice());
             scrivi.Write(paziente.getCodice());
 
-            scrivi.Write(formattaStringa(data));
+            scrivi.Write(formattaStringa(data));  // da sistemare
             scrivi.Write(formattaStringa(argomento));
 
             scrivi.Write(formattaNumero(orario));
@@ -56,12 +56,12 @@ namespace StudioPsicologia
 
 
         // formatta stringa
-        private string formattaStringa(string stringa) // da testare
+        private string formattaStringa(string stringa)
         {
             if (stringa.Length > 20)
-                stringa.Substring(0, 20);
+                stringa = stringa.Substring(0, 20);
             else if (stringa.Length < 20)
-                stringa.PadRight(20);
+                stringa = stringa.PadRight(20);
             return stringa;
         }
 

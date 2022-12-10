@@ -9,14 +9,14 @@ namespace StudioPsicologia
 {
     class Medico
     {
-        string nome;
-        string cognome;
-        string specializzazione;
-        bool inCarica;
+        string nome;               // 20 + 1 byte
+        string cognome;            // 20 + 1 byte
+        string specializzazione;   // 20 + 1 byte
+        bool inCarica;             // 1 byte
+        int inizioOrario;          // 4 byte
+        int fineOrario;            // 4 byte
 
-        int inizioOrario;
-        int fineOrario;
-
+        // 21 + 21 + 21 + 1 + 4 + 4  = 72 + codice 10 + 1
 
         public string _nome { get { return nome; } set { nome = value; } }
         public string _cognome { get { return cognome; } set { cognome = value; } }
@@ -42,20 +42,13 @@ namespace StudioPsicologia
         public Medico() : this("Medico", "Medico", "//", false, 0, 0) { }
 
 
-        //// restituisce la quantità di byte occupata dal Medico nel file binario
-        //public int getByte()
-        //{
-        //    return 0;
-        //}
-
-
         // formatta stringa
-        private string formattaStringa(string stringa) // da testare
+        private string formattaStringa(string stringa)
         {
             if (stringa.Length > 20)
-                stringa.Substring(0, 20);
+                stringa  = stringa.Substring(0, 20);
             else if (stringa.Length < 20)
-                stringa.PadRight(20);
+                stringa = stringa.PadRight(20);
             return stringa;
         }
 
@@ -76,10 +69,10 @@ namespace StudioPsicologia
 
             fs.Seek(0, SeekOrigin.End);       // chiedere se va bene
 
-            scrivi.Write(formattaStringa(nome));
+            scrivi.Write(formattaStringa(nome));        // lunghezza 20
             scrivi.Write(formattaStringa(cognome));
             scrivi.Write(formattaStringa(specializzazione));
-            scrivi.Write(inCarica);
+            scrivi.Write(inCarica);                      
             scrivi.Write(inizioOrario);
             scrivi.Write(fineOrario);
 
@@ -90,7 +83,7 @@ namespace StudioPsicologia
 
 
         // crea codice medico
-        private string codiceMedico()  // da controllare
+        private string codiceMedico()  // 10 caratteri
         {
             string codiceMedico =
                 $"{nome.Substring(0, 1).ToUpper()}" +
@@ -104,6 +97,18 @@ namespace StudioPsicologia
         public string getCodice()
         {
             return codiceMedico();
+        }
+
+        // mi restituisce la lunghezza del medico nel file binario
+        public int getByte()
+        {
+            return 72 + 11;
+        }
+
+        // lunghezza codice
+        public int lunghezzaCodice()
+        {
+            return 11;
         }
     }
 }

@@ -37,8 +37,7 @@ namespace StudioPsicologia
 
 
 
-
-
+        // ----------------------------------------------------------------------------------------------------
 
 
 
@@ -47,103 +46,64 @@ namespace StudioPsicologia
         {
             // bottoni
             btnRimuoviMedico.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, btnRimuoviMedico.Width, btnRimuoviMedico.Height, 10, 10));
-            btnSelezionaMedico.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, btnSelezionaMedico.Width, btnSelezionaMedico.Height, 10, 10));
-
-            // pannelli
-            plInformazioniMedico.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, plInformazioniMedico.Width, plInformazioniMedico.Height, 10, 10));
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        string codiceMedico = "";
-        Medico medico = new Medico();
-
-        // bottone seleziona medico
-        private void btnSelezionaMedico_Click(object sender, EventArgs e)
-        {
-            codiceMedico = tbCodiceMedico.Text;
-            if (cercaMedico(codiceMedico))
-            {
-                // aggiorna label con medico trovato
-                lblNomeMedico.Text = medico._nome;
-                lblCognomeMedico.Text = medico._cognome;
-                lblSpecializzazioneMedico.Text = medico._specializzazione;
-                if (medico._inCarica)
-                    lblInCarica.Text = "Si";
-                else
-                    lblInCarica.Text = "No";
-            }
-        }
 
         // bottone rimuovi medico
         private void btnRimuoviMedico_Click(object sender, EventArgs e)
         {
-            rimuoviMedicoDallaCarica();
+            if (rimuoviMedicoDallaCarica(tbCodiceMedico.Text))
+                MessageBox.Show("Il medico è stato rimosso dalla carica", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else
+                MessageBox.Show("Il codice inserito non esiste", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-
-
-
-
-
-
-
-
-
-        // funzione cerca medico
-        private bool cercaMedico(string codice)     // da fare
-        {
-            // se esiste setta il medico e ritorna true 
-            // altrimenti false
-
-            Medico medicoTrovato = new Medico();
-
-            if (true)
-            {
-                medico = medicoTrovato;
-                return true;
-            }
-            return false;
-        }
 
         // funzione riscrivi medico
-        private void rimuoviMedicoDallaCarica()
+        public bool rimuoviMedicoDallaCarica(string codiceMedico)
         {
+            Medico med = new Medico();
             FileStream fs = new FileStream("Medici.bin", FileMode.OpenOrCreate);
             BinaryWriter scrivi = new BinaryWriter(fs);
             BinaryReader leggi = new BinaryReader(fs);
 
-
-
-
-
-
-
-
-            string codiceMedicoLetto = "";
-            if (medico.getCodice() == codiceMedicoLetto)
+            while (fs.Position < fs.Length)
             {
-                // vai dove si trova il true nel file e cambialo con false
+                fs.Seek(med.getByte() - med.lunghezzaCodice(), SeekOrigin.Current);
+                string codiceLetto = leggi.ReadString();
+
+                if (codiceLetto == codiceMedico)
+                {
+                    fs.Seek(- (med.lunghezzaCodice() + 4 + 4 + 1), SeekOrigin.Current);
+
+                    // rimuovi dalla carica
+                    bool inCarica = false;
+                    scrivi.Write(inCarica);
+
+                    fs.Seek(4 + 4, SeekOrigin.Current);
+
+                    // modifico il codice medico
+                    string appo = "";
+                    for (int i = 0; i < codiceMedico.Length; i++)
+                    {
+                        if (i == 5)
+                            appo += 'F';
+                        else
+                            appo += codiceMedico[i];
+                    }
+                    scrivi.Write(appo);
+
+                    fs.Close();
+                    return true;
+                }
             }
+            fs.Close();
+            return false;
         }
 
 
 
-
-
-
+        // ----------------------------------------------------------------------------------------------------
 
 
 

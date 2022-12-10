@@ -37,10 +37,7 @@ namespace StudioPsicologia
 
 
 
-
-
-
-
+        // ----------------------------------------------------------------------------------------------------
 
 
 
@@ -53,11 +50,6 @@ namespace StudioPsicologia
 
         // medico
         Medico medico = new Medico();
-
-
-
-
-
 
 
         // bottone aggiungi medico
@@ -120,34 +112,24 @@ namespace StudioPsicologia
             FileStream fs = new FileStream("Medici.bin", FileMode.OpenOrCreate);
             BinaryReader leggi = new BinaryReader(fs);
 
-            // leggo
+            while (fs.Position < fs.Length)
+            {
+                fs.Seek(med.getByte() - med.lunghezzaCodice(), SeekOrigin.Current);       // 72 byte tra un codice e l'altro (specificato nella classe medico)
+                string codiceLetto = leggi.ReadString();
 
-            //string codiceLetto = "";
-
-            //if (codiceLetto == med.getCodice())
-            //{
-            //    fs.Close();
-            //    return true;
-            //}
-
+                if (codiceLetto == med.getCodice())
+                {
+                    fs.Close();
+                    return true;
+                }
+            }
             fs.Close();
             return false;
         }
 
 
 
-
-
-
-        // COSE DA FARE
-        // aggiungere lettura medici per controllare che non esistino
-
-
-
-
-
-
-
+        // ----------------------------------------------------------------------------------------------------
 
 
 

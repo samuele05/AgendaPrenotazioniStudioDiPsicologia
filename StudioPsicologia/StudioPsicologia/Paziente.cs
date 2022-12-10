@@ -9,13 +9,14 @@ namespace StudioPsicologia
 {
     class Paziente
     {
-        string nome;
-        string cognome;
-        int giornoNascita;
-        int meseNascita;
-        int annoNascita;
-        string IBAN;
+        string nome;           // 20 + 1 byte
+        string cognome;        // 20 + 1 byte
+        int giornoNascita;     // 4 byte
+        int meseNascita;       // 4 byte
+        int annoNascita;       // 4 byte
+        string IBAN;           // 27 + 1 byte
 
+        // 21 + 21 + 4 + 4 + 4 = 54 + 28 = 82
 
         public string  _nome { get { return nome; } set { nome = value; } }
         public string _cognome { get { return cognome; } set { cognome = value; } }
@@ -41,20 +42,13 @@ namespace StudioPsicologia
         public Paziente() : this( "Paziente", "Paziente", DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year, "IBAN") { }
 
 
-        //// restituisce la quantità di byte occupata dal paziente nel file binario
-        //public int getByte()
-        //{
-        //    return 0;
-        //}
-
-
         // formatta la stringa
-        private string formattaStringa(string stringa) // da testare
+        private string formattaStringa(string stringa)
         {
             if (stringa.Length > 20)
-                stringa.Substring(0, 20);
+                stringa = stringa.Substring(0, 20);
             else if (stringa.Length < 20)
-                stringa.PadRight(20);
+                stringa = stringa.PadRight(20);
             return stringa;
         }
 
@@ -104,6 +98,18 @@ namespace StudioPsicologia
         {
             //return cadicePaziente();
             return IBAN;
+        }
+
+        // mi restituisce la lunghezza del paziente nel file binario
+        public int getByte()
+        {
+            return 54 + 28;
+        }
+
+        // lunghezza IBAN
+        public int lunghezzaCodice()
+        {
+            return 28;
         }
     }
 }

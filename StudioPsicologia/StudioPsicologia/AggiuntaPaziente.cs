@@ -37,11 +37,7 @@ namespace StudioPsicologia
 
 
 
-
-
-
-
-
+        // ----------------------------------------------------------------------------------------------------
 
 
 
@@ -51,15 +47,11 @@ namespace StudioPsicologia
             btnAggiungiPaziente.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, btnAggiungiPaziente.Width, btnAggiungiPaziente.Height, 10, 10));
         }
 
+
         Paziente paziente = new Paziente();
         int giornoDiNascita;
         int meseDiNascita;
         int annoDiNascita;
-
-
-
-
-
 
 
         // bottone aggiungi paziente
@@ -123,16 +115,17 @@ namespace StudioPsicologia
             FileStream fs = new FileStream("Pazienti.bin", FileMode.OpenOrCreate);
             BinaryReader leggi = new BinaryReader(fs);
 
-            // leggo
+            while (fs.Position < fs.Length)
+            {
+                fs.Seek(paz.getByte() - paz.lunghezzaCodice(), SeekOrigin.Current);          // 54 byte tra un IBAN e l'altro (specificato nella classe paziente)
+                string codiceLetto = leggi.ReadString();
 
-            //string codiceLetto = "";
-
-            //if (codiceLetto == paz.getCodice())
-            //{
-            //    fs.Close();
-            //    return true;
-            //}
-
+                if (codiceLetto == paz.getCodice())
+                {
+                    fs.Close();
+                    return true;
+                }
+            }
             fs.Close();
             return false;
         }
@@ -149,15 +142,7 @@ namespace StudioPsicologia
 
 
 
-
-
-        // COSE DA FARE
-        // aggiungere lettura pazienti per controllare che non esistino
-
-
-
-
-
+        // ----------------------------------------------------------------------------------------------------
 
 
 
