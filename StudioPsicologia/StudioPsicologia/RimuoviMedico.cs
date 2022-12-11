@@ -53,7 +53,14 @@ namespace StudioPsicologia
         private void btnRimuoviMedico_Click(object sender, EventArgs e)
         {
             if (rimuoviMedicoDallaCarica(tbCodiceMedico.Text))
+            {
+                // ricarica medici
+                Form1.instance.caricaMedici();
+                Form1.instance.caricaCbMedici();
+
                 MessageBox.Show("Il medico è stato rimosso dalla carica", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
+            }
             else
                 MessageBox.Show("Il codice inserito non esiste", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }

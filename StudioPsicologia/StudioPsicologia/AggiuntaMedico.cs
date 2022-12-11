@@ -58,7 +58,14 @@ namespace StudioPsicologia
             if (inizializzaMedico())
             {
                 if (scriviMed())
+                {
+                    // ricarica medici
+                    Form1.instance.caricaMedici();
+                    Form1.instance.caricaCbMedici();
+
                     MessageBox.Show("Aggiunto", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close();
+                }
                 else
                     MessageBox.Show("Esiste già o non è stao inserito nulla", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             } 

@@ -61,6 +61,10 @@ namespace StudioPsicologia
             {
                 if (scriviPaz())
                 {
+                    // ricarica pazienti
+                    Form1.instance.caricaPazienti();
+                    Form1.instance.caricaCbPazienti();
+
                     MessageBox.Show("Aggiunto", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
                 }

@@ -48,11 +48,13 @@ namespace StudioPsicologia
             btnAggiungiMedico.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, btnAggiungiMedico.Width, btnAggiungiMedico.Height, 10, 10));
             btnRimuoviMedico.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, btnRimuoviMedico.Width, btnRimuoviMedico.Height, 10, 10));
             btnAggiungiAppuntamento.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, btnAggiungiAppuntamento.Width, btnAggiungiAppuntamento.Height, 10, 10));
+            btnRimuoviAppuntamento.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, btnRimuoviAppuntamento.Width, btnRimuoviAppuntamento.Height, 10, 10));
 
             // pannelli
             plInformazioniAppuntamento.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, plInformazioniAppuntamento.Width, plInformazioniAppuntamento.Height, 10, 10));
             plAppuntamento.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, plAppuntamento.Width, plAppuntamento.Height, 10, 10));
             plArgomento.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, plArgomento.Width, plArgomento.Height, 10, 10));
+            plSelezionaAppuntamento.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, plSelezionaAppuntamento.Width, plSelezionaAppuntamento.Height, 10, 10));
 
 
             // funzione start
@@ -153,9 +155,11 @@ namespace StudioPsicologia
 
 
 
-        // funzione carica medici leggendo da file
+        // funzione carica medici da file
         public void caricaMedici()
         {
+            medici.Clear();
+
             FileStream fs = new FileStream("Medici.bin", FileMode.OpenOrCreate);
             BinaryReader leggi = new BinaryReader(fs);
 
@@ -178,9 +182,11 @@ namespace StudioPsicologia
         }
 
 
-        // funzione carica pazienti leggendo da file
+        // funzione carica pazienti da file
         public void caricaPazienti()
         {
+            pazienti.Clear();
+
             FileStream fs = new FileStream("Pazienti.bin", FileMode.OpenOrCreate);
             BinaryReader leggi = new BinaryReader(fs);
 
@@ -201,69 +207,133 @@ namespace StudioPsicologia
         }
 
 
-        // funzione carica pazienti nelle combo box
+
+
+
+        // funzione carica pazienti nella combobox
         public void caricaCbPazienti()
         {
+            cbPazienti.Items.Clear();
             for (int i = 0; i < pazienti.Count; i++)
                 cbPazienti.Items.Add($"{pazienti[i]._nome} {pazienti[i]._cognome} {pazienti[i].getCodice()}");
         }
 
-        // funzione carica medici nelle combo box
+        // funzione carica medici nella combobox
         public void caricaCbMedici()
         {
+            cbMedici.Items.Clear();
             for (int i = 0; i < medici.Count; i++)
-                cbMedici.Items.Add($"{medici[i]._nome} {medici[i]._cognome} {medici[i].getCodice()}");
+                if (medici[i]._inCarica)    // carica solo i medici in carica
+                    cbMedici.Items.Add($"{medici[i]._nome} {medici[i]._cognome} {medici[i].getCodice()}");
         }
 
+        // carica appuntamenti nella combobox
+        public void caricaCbAppuntamenti()
+        {
+            cbAppuntamenti.Items.Clear();
+            for (int i = 0; i < studio._appuntamenti.Count; i++)
+                if (studio._appuntamenti[i]._data == dtpAppuntamenti.Text)
+                    cbAppuntamenti.Items.Add($"medico: {studio._appuntamenti[i]._medico._cognome} |" +
+                        $" paziente: {studio._appuntamenti[i]._paziente._cognome} {studio._appuntamenti[i]._paziente._nome} |" +
+                        $" ora: {studio._appuntamenti[i]._orario} |" +
+                        $" codice: {studio._appuntamenti[i].codiceAppuntamento()}");     
+        }
 
 
 
         // bottone aggiungi appuntamento
         private void btnAggiungiAppuntamento_Click(object sender, EventArgs e)
         {
-            // definisci appuntamento
             if (cbPazienti.Text != "" && cbMedici.Text != "")
             {
-                Appuntamento app = new Appuntamento();
-                string codicePaziente = cbPazienti.SelectedItem.ToString().Split(' ')[2];
-                string codiceMedico = cbMedici.SelectedItem.ToString().Split(' ')[2];
-
-                // definisci paziente
-                for (int i = 0; i < pazienti.Count; i++)
-                    if (pazienti[i].getCodice() == codicePaziente)
-                        app._paziente = pazienti[i];
-
-                // definisci medico
-                for (int i = 0; i < medici.Count; i++)
-                    if (medici[i].getCodice() == codiceMedico)
-                        app._medico = medici[i];
-
-                // definisci data
-                app._data = dtpDataAppuntamento.Text;
-                app._orario = Convert.ToInt32(nudOrario.Value);
-
-                // definisci argomento
-                app._argomento = tbArgomentoAppuntamento.Text;
-
-                // aggiungi appuntamento
-                studio.aggiungiAppuntamento(app);
-                app.scriviAppuntemento();
+                if (!appEsiste())
+                {
+                    if (controllaOrario())
+                    {
+                        if (aggiungiAppuntamento())
+                        {
+                            MessageBox.Show("Appuntamento aggiunto", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else 
+                            MessageBox.Show("Questo medico non è disponibile", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                        MessageBox.Show("L'orario non esiste", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }      
+                else
+                    MessageBox.Show("L'orario è occupato", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             else
                 MessageBox.Show("Tutti i campi non sono stati inseriti", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+            // aggiorna gli appuntamenti una volta agiunti
+            caricaCbAppuntamenti();
+        }
+
+
+        // funzione esiste appuntamento
+        public bool appEsiste()
+        {
+            int orario = Convert.ToInt32(nudOrario.Value);
+            for (int i = 0; i < studio._appuntamenti.Count; i++)
+                    if (studio._appuntamenti[i]._data == dtpDataAppuntamento.Text)
+                        if (studio._appuntamenti[i]._orario == orario)
+                            return true;
+            return false;
+        }
+
+
+        // controlla orario
+        public bool controllaOrario()
+        {
+            int orario = Convert.ToInt32(nudOrario.Value);
+            if (orario >= apertura && orario < chiusura)
+                return true;
+            return false;
+        }
+
+
+        // funzione inizializza e scrivi appuntamento
+        private bool aggiungiAppuntamento()
+        {
+            Appuntamento app = new Appuntamento();
+            string codicePaziente = cbPazienti.SelectedItem.ToString().Split(' ')[2];
+            string codiceMedico = cbMedici.SelectedItem.ToString().Split(' ')[2];
+
+            // definisci paziente
+            for (int i = 0; i < pazienti.Count; i++)
+                if (pazienti[i].getCodice() == codicePaziente)
+                    app._paziente = pazienti[i];
+
+            // definisci medico
+            for (int i = 0; i < medici.Count; i++)
+                if (medici[i].getCodice() == codiceMedico)
+                    app._medico = medici[i];
+
+            // definisci data
+            app._data = dtpDataAppuntamento.Text;
+            int orario = Convert.ToInt32(nudOrario.Value);
+
+            if (!(orario >= app._medico._inizioOrario && orario < app._medico._fineOrario))
+                return false;
+
+            app._orario = orario;
+
+            // definisci argomento
+            app._argomento = tbArgomentoAppuntamento.Text;
+
+            // aggiungi appuntamento
+            studio.aggiungiAppuntamento(app);
+            app.scriviAppuntemento();
+
+            return true;
         }
 
 
 
         // COSE DA FARE
 
-        // ricordati di ricaricare pazienti, medici e appuntamenti quando si chiude un form di aggiunta
-
-        // aggiungere lettura file ed eventuali controlli di esistenza degli appuntamenti
-
-        // lorario dell'appuntamento deve essere consono con quello dei medici e degli appuntamenti esistenti
-
-        // fare in modo di visualizzare gli appuntamenti e modificarli
+        // fare in modo di rimuovere gli appuntamenti
 
 
 
