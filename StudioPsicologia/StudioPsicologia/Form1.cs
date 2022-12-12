@@ -62,14 +62,6 @@ namespace StudioPsicologia
         }
 
 
-
-
-
-
-
-
-
-
         // liste
         List<Medico> medici = new List<Medico>();
         List<Paziente> pazienti = new List<Paziente>();
@@ -101,6 +93,9 @@ namespace StudioPsicologia
             // studio
             definisciOrariStudio();
             caricaAppuntamenti();
+
+            // carica combobox appuntamenti
+            caricaCbAppuntamenti();
         }
 
 
@@ -113,13 +108,14 @@ namespace StudioPsicologia
             while (fs.Position < fs.Length)
             {
                 Appuntamento app = new Appuntamento();
-
                 app._medico = cercaMedico(leggi.ReadString());
                 app._paziente = cercaPaziente(leggi.ReadString());
                 app._data = leggi.ReadString();
                 app._argomento = leggi.ReadString();
                 app._orario = leggi.ReadInt32();
+                app._concluso = leggi.ReadBoolean();
 
+                fs.Seek(50 + 1, SeekOrigin.Current);
                 studio.aggiungiAppuntamento(app);
             }
             fs.Close();
@@ -146,13 +142,6 @@ namespace StudioPsicologia
                     paz = pazienti[i];
             return paz;
         }
-
-
-
-
-
-
-
 
 
         // funzione carica medici da file
@@ -207,9 +196,6 @@ namespace StudioPsicologia
         }
 
 
-
-
-
         // funzione carica pazienti nella combobox
         public void caricaCbPazienti()
         {
@@ -233,10 +219,11 @@ namespace StudioPsicologia
             cbAppuntamenti.Items.Clear();
             for (int i = 0; i < studio._appuntamenti.Count; i++)
                 if (studio._appuntamenti[i]._data == dtpAppuntamenti.Text)
-                    cbAppuntamenti.Items.Add($"medico: {studio._appuntamenti[i]._medico._cognome} |" +
+                    if (!(studio._appuntamenti[i]._concluso))
+                        cbAppuntamenti.Items.Add($"medico: {studio._appuntamenti[i]._medico._cognome} |" +
                         $" paziente: {studio._appuntamenti[i]._paziente._cognome} {studio._appuntamenti[i]._paziente._nome} |" +
                         $" ora: {studio._appuntamenti[i]._orario} |" +
-                        $" codice: {studio._appuntamenti[i].codiceAppuntamento()}");     
+                        $" codice: {studio._appuntamenti[i].codiceAppuntamento()}");
         }
 
 
@@ -252,6 +239,7 @@ namespace StudioPsicologia
                     {
                         if (aggiungiAppuntamento())
                         {
+                            caricaCbAppuntamenti();
                             MessageBox.Show("Appuntamento aggiunto", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                         else 
@@ -271,13 +259,66 @@ namespace StudioPsicologia
         }
 
 
+        // bottone rimuovi appuntamento
+        private void btnRimuoviAppuntamento_Click(object sender, EventArgs e)
+        {
+            if (cbAppuntamenti.Text != "")
+            {
+                string codice = cbAppuntamenti.Text.Split(' ')[11];
+                if (rimuoviAppuntamento(codice))
+                {
+                    caricaCbAppuntamenti();
+                    MessageBox.Show("Rimosso", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                    MessageBox.Show("L'appuntamento non esiste", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            else
+                MessageBox.Show("Inserire tutti i campi", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        
+
+        // funzione rimuovi appuntamento
+        public bool rimuoviAppuntamento(string codiceAppuntameneto)
+        {
+            Appuntamento app = new Appuntamento();
+            FileStream fs = new FileStream("Appuntamenti.bin", FileMode.OpenOrCreate);
+            BinaryWriter scrivi = new BinaryWriter(fs);
+            BinaryReader leggi = new BinaryReader(fs);
+
+            while (fs.Position < fs.Length)
+            {
+                fs.Seek(app.getByte() - app.lunghezzaCodice(), SeekOrigin.Current);
+                string codiceLetto = leggi.ReadString();
+
+                if (codiceLetto == codiceAppuntameneto)
+                {
+                    fs.Seek(-(app.getByte()), SeekOrigin.Current);
+
+                    for (int i = 0; i < studio._appuntamenti.Count; i++)
+                        if (studio._appuntamenti[i].codiceAppuntamento() == codiceAppuntameneto)
+                        {
+                            studio._appuntamenti[i]._concluso = true;
+                            studio._appuntamenti[i].scriviApp(scrivi);
+                        }
+
+                    fs.Close();
+                    return true;
+                }
+            }
+            fs.Close();
+            return false;
+        }
+
+
         // funzione esiste appuntamento
         public bool appEsiste()
         {
             int orario = Convert.ToInt32(nudOrario.Value);
             for (int i = 0; i < studio._appuntamenti.Count; i++)
-                    if (studio._appuntamenti[i]._data == dtpDataAppuntamento.Text)
-                        if (studio._appuntamenti[i]._orario == orario)
+                if (studio._appuntamenti[i]._data == dtpDataAppuntamento.Text)
+                    if (studio._appuntamenti[i]._orario == orario)
+                        if (!(studio._appuntamenti[i]._concluso))
                             return true;
             return false;
         }
@@ -322,18 +363,15 @@ namespace StudioPsicologia
             // definisci argomento
             app._argomento = tbArgomentoAppuntamento.Text;
 
+            // definisci stato appuntamento
+            app._concluso = false;
+
             // aggiungi appuntamento
             studio.aggiungiAppuntamento(app);
             app.scriviAppuntemento();
 
             return true;
         }
-
-
-
-        // COSE DA FARE
-
-        // fare in modo di rimuovere gli appuntamenti
 
 
 

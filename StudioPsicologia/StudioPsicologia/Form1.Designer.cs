@@ -287,6 +287,7 @@ namespace StudioPsicologia
             this.btnRimuoviAppuntamento.TabIndex = 23;
             this.btnRimuoviAppuntamento.Text = "Rimuovi appuntamento";
             this.btnRimuoviAppuntamento.UseVisualStyleBackColor = false;
+            this.btnRimuoviAppuntamento.Click += new System.EventHandler(this.btnRimuoviAppuntamento_Click);
             // 
             // plSelezionaAppuntamento
             // 
