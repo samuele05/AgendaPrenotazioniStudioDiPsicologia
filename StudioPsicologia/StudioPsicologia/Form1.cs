@@ -51,6 +51,7 @@ namespace StudioPsicologia
             btnRimuoviAppuntamento.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, btnRimuoviAppuntamento.Width, btnRimuoviAppuntamento.Height, 10, 10));
             btnRimuoviPaziente.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, btnRimuoviPaziente.Width, btnRimuoviPaziente.Height, 10, 10));
             btnModificaAppuntamento.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, btnModificaAppuntamento.Width, btnModificaAppuntamento.Height, 10, 10));
+            btnSeleziona.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, btnSeleziona.Width, btnSeleziona.Height, 10, 10));
 
             // pannelli
             plInformazioniAppuntamento.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, plInformazioniAppuntamento.Width, plInformazioniAppuntamento.Height, 10, 10));
@@ -101,6 +102,33 @@ namespace StudioPsicologia
 
             // svuota label info appuntamento
             svuotaLabelInfoAppuntamento();
+        }
+
+
+        // funzione orari liberi
+        public void orariLiberi()
+        {
+            cbOrariLiberi.Items.Clear();
+            List<int> lista = new List<int>();
+
+            int inizioOrario = 0;
+            int fineOrario = 0;
+            if (cbMedici.Text != "")
+            {
+                inizioOrario = cercaMedico(cbMedici.Text.Split(' ')[2])._inizioOrario;
+                fineOrario = cercaMedico(cbMedici.Text.Split(' ')[2])._fineOrario;
+            }
+
+            for (int i = 0; i < chiusura - apertura; i++)
+                lista.Add(i + 8);
+
+            for (int i = 0; i < studio._appuntamenti.Count; i++)
+                if (studio._appuntamenti[i]._data == dtpDataAppuntamento.Text)
+                    lista.Remove(studio._appuntamenti[i]._orario);
+
+            for (int i = 0; i < lista.Count; i++)
+                if (lista[i] >= inizioOrario && lista[i] < fineOrario)
+                    cbOrariLiberi.Items.Add(lista[i]);
         }
 
 
@@ -351,7 +379,10 @@ namespace StudioPsicologia
         // funzione esiste appuntamento
         public bool appEsiste()
         {
-            int orario = Convert.ToInt32(nudOrario.Value);
+            int orario = 0;
+            if (cbOrariLiberi.Text != "") 
+                orario = Convert.ToInt32(cbOrariLiberi.Text);
+
             for (int i = 0; i < studio._appuntamenti.Count; i++)
                 if (studio._appuntamenti[i]._data == dtpDataAppuntamento.Text)
                     if (studio._appuntamenti[i]._orario == orario)
@@ -364,7 +395,10 @@ namespace StudioPsicologia
         // controlla orario
         public bool controllaOrario()
         {
-            int orario = Convert.ToInt32(nudOrario.Value);
+            int orario = 0;
+            if (cbOrariLiberi.Text != "")
+                orario = Convert.ToInt32(cbOrariLiberi.Text);
+
             if (orario >= apertura && orario < chiusura)
                 return true;
             return false;
@@ -390,7 +424,9 @@ namespace StudioPsicologia
 
             // definisci data
             app._data = dtpDataAppuntamento.Text;
-            int orario = Convert.ToInt32(nudOrario.Value);
+            int orario = 0;
+            if (cbOrariLiberi.Text != "")
+                orario = Convert.ToInt32(cbOrariLiberi.Text);
 
             if (!(orario >= app._medico._inizioOrario && orario < app._medico._fineOrario))
                 return false;
@@ -425,6 +461,12 @@ namespace StudioPsicologia
             rimuoviMedico.ShowDialog();
         }
 
+        // bottone seleziona data
+        private void btnSeleziona_Click(object sender, EventArgs e)
+        {
+            caricaCbAppuntamenti();
+        }
+
 
 
         // ----------------------------------------------------------------------------------------------------
@@ -443,10 +485,20 @@ namespace StudioPsicologia
             aggiuntaMedico.ShowDialog();
         }
 
+        // appoggio per verificare se la data o il medico sono cambiati
+        string dataTest = "";
+        string medicoTest = "";
+
         // timer
         private void timer1_Tick(object sender, EventArgs e)
         {
             caricaInfoAppuntamento();
+            if (dtpDataAppuntamento.Text != dataTest || cbMedici.Text != medicoTest)
+            {
+                orariLiberi();
+                dataTest = dtpDataAppuntamento.Text;
+                medicoTest = cbMedici.Text;
+            }
         }
     }
 }

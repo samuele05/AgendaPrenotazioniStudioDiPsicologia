@@ -43,7 +43,6 @@ namespace StudioPsicologia
             this.tbArgomentoAppuntamento = new System.Windows.Forms.TextBox();
             this.plAppuntamento = new System.Windows.Forms.Panel();
             this.dtpDataAppuntamento = new System.Windows.Forms.DateTimePicker();
-            this.nudOrario = new System.Windows.Forms.NumericUpDown();
             this.plArgomento = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.dtpAppuntamenti = new System.Windows.Forms.DateTimePicker();
@@ -62,8 +61,9 @@ namespace StudioPsicologia
             this.label7 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.btnRimuoviPaziente = new System.Windows.Forms.Button();
+            this.cbOrariLiberi = new System.Windows.Forms.ComboBox();
+            this.btnSeleziona = new System.Windows.Forms.Button();
             this.plAppuntamento.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudOrario)).BeginInit();
             this.plArgomento.SuspendLayout();
             this.plSelezionaAppuntamento.SuspendLayout();
             this.plInformazioniAppuntamento.SuspendLayout();
@@ -212,8 +212,8 @@ namespace StudioPsicologia
             // plAppuntamento
             // 
             this.plAppuntamento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.plAppuntamento.Controls.Add(this.cbOrariLiberi);
             this.plAppuntamento.Controls.Add(this.dtpDataAppuntamento);
-            this.plAppuntamento.Controls.Add(this.nudOrario);
             this.plAppuntamento.Controls.Add(this.cbMedici);
             this.plAppuntamento.Controls.Add(this.plArgomento);
             this.plAppuntamento.Controls.Add(this.label5);
@@ -236,15 +236,6 @@ namespace StudioPsicologia
             this.dtpDataAppuntamento.Name = "dtpDataAppuntamento";
             this.dtpDataAppuntamento.Size = new System.Drawing.Size(191, 22);
             this.dtpDataAppuntamento.TabIndex = 22;
-            // 
-            // nudOrario
-            // 
-            this.nudOrario.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.nudOrario.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
-            this.nudOrario.Location = new System.Drawing.Point(99, 119);
-            this.nudOrario.Name = "nudOrario";
-            this.nudOrario.Size = new System.Drawing.Size(80, 22);
-            this.nudOrario.TabIndex = 21;
             // 
             // plArgomento
             // 
@@ -304,6 +295,7 @@ namespace StudioPsicologia
             // plSelezionaAppuntamento
             // 
             this.plSelezionaAppuntamento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.plSelezionaAppuntamento.Controls.Add(this.btnSeleziona);
             this.plSelezionaAppuntamento.Controls.Add(this.btnModificaAppuntamento);
             this.plSelezionaAppuntamento.Controls.Add(this.btnRimuoviAppuntamento);
             this.plSelezionaAppuntamento.Controls.Add(this.label6);
@@ -442,6 +434,7 @@ namespace StudioPsicologia
             // timer1
             // 
             this.timer1.Enabled = true;
+            this.timer1.Interval = 500;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // btnRimuoviPaziente
@@ -458,6 +451,33 @@ namespace StudioPsicologia
             this.btnRimuoviPaziente.Text = "Rimuovi paziente";
             this.btnRimuoviPaziente.UseVisualStyleBackColor = false;
             this.btnRimuoviPaziente.Click += new System.EventHandler(this.btnRimuoviPaziente_Click);
+            // 
+            // cbOrariLiberi
+            // 
+            this.cbOrariLiberi.BackColor = System.Drawing.SystemColors.Window;
+            this.cbOrariLiberi.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbOrariLiberi.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
+            this.cbOrariLiberi.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.cbOrariLiberi.FormattingEnabled = true;
+            this.cbOrariLiberi.Location = new System.Drawing.Point(99, 119);
+            this.cbOrariLiberi.Name = "cbOrariLiberi";
+            this.cbOrariLiberi.Size = new System.Drawing.Size(80, 21);
+            this.cbOrariLiberi.TabIndex = 23;
+            // 
+            // btnSeleziona
+            // 
+            this.btnSeleziona.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(93)))), ((int)(((byte)(114)))));
+            this.btnSeleziona.FlatAppearance.BorderSize = 0;
+            this.btnSeleziona.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSeleziona.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
+            this.btnSeleziona.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(165)))), ((int)(((byte)(166)))));
+            this.btnSeleziona.Location = new System.Drawing.Point(136, 51);
+            this.btnSeleziona.Name = "btnSeleziona";
+            this.btnSeleziona.Size = new System.Drawing.Size(98, 22);
+            this.btnSeleziona.TabIndex = 25;
+            this.btnSeleziona.Text = "Seleziona";
+            this.btnSeleziona.UseVisualStyleBackColor = false;
+            this.btnSeleziona.Click += new System.EventHandler(this.btnSeleziona_Click);
             // 
             // Form1
             // 
@@ -481,7 +501,6 @@ namespace StudioPsicologia
             this.Load += new System.EventHandler(this.Form1_Load);
             this.plAppuntamento.ResumeLayout(false);
             this.plAppuntamento.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudOrario)).EndInit();
             this.plArgomento.ResumeLayout(false);
             this.plArgomento.PerformLayout();
             this.plSelezionaAppuntamento.ResumeLayout(false);
@@ -508,7 +527,6 @@ namespace StudioPsicologia
         private System.Windows.Forms.Panel plAppuntamento;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel plArgomento;
-        private System.Windows.Forms.NumericUpDown nudOrario;
         private System.Windows.Forms.DateTimePicker dtpDataAppuntamento;
         private System.Windows.Forms.DateTimePicker dtpAppuntamenti;
         private System.Windows.Forms.ComboBox cbAppuntamenti;
@@ -526,6 +544,8 @@ namespace StudioPsicologia
         private System.Windows.Forms.Button btnRimuoviPaziente;
         private System.Windows.Forms.Button btnModificaAppuntamento;
         private System.Windows.Forms.TextBox tbArgomentoInfoAppuntamento;
+        private System.Windows.Forms.ComboBox cbOrariLiberi;
+        private System.Windows.Forms.Button btnSeleziona;
     }
 }
 
