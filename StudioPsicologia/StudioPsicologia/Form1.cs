@@ -96,6 +96,9 @@ namespace StudioPsicologia
 
             // carica combobox appuntamenti
             caricaCbAppuntamenti();
+
+            // svuota label info appuntamento
+            svuotaLabelInfoAppuntamento();
         }
 
 
@@ -213,19 +216,44 @@ namespace StudioPsicologia
                     cbMedici.Items.Add($"{medici[i]._nome} {medici[i]._cognome} {medici[i].getCodice()}");
         }
 
-        // carica appuntamenti nella combobox
+        // funzione carica appuntamenti nella combobox
         public void caricaCbAppuntamenti()
         {
             cbAppuntamenti.Items.Clear();
             for (int i = 0; i < studio._appuntamenti.Count; i++)
                 if (studio._appuntamenti[i]._data == dtpAppuntamenti.Text)
                     if (!(studio._appuntamenti[i]._concluso))
-                        cbAppuntamenti.Items.Add($"medico: {studio._appuntamenti[i]._medico._cognome} |" +
-                        $" paziente: {studio._appuntamenti[i]._paziente._cognome} {studio._appuntamenti[i]._paziente._nome} |" +
+                        cbAppuntamenti.Items.Add(/*$"medico: {studio._appuntamenti[i]._medico._cognome} |" +
+                        $" paziente: {studio._appuntamenti[i]._paziente._cognome} {studio._appuntamenti[i]._paziente._nome} |" + */
                         $" ora: {studio._appuntamenti[i]._orario} |" +
                         $" codice: {studio._appuntamenti[i].codiceAppuntamento()}");
         }
 
+        // funzione carica informazioni appuntamenti
+        public void caricaInfoAppuntamento()
+        {
+            for (int i = 0; i < studio._appuntamenti.Count; i++)
+            {
+                if (i == cbAppuntamenti.SelectedIndex)
+                {
+                    lblMedicoAppuntamento.Text = studio._appuntamenti[i]._medico.ToString();
+                    lblPazienteAppuntamento.Text = studio._appuntamenti[i]._paziente.ToString();
+                    lblDataAppuntamento.Text = studio._appuntamenti[i]._data;
+                    lblOrarioAppuntamento.Text = studio._appuntamenti[i]._orario.ToString();
+                    lblArgomentoAppuntamento.Text = studio._appuntamenti[i]._argomento;
+                }
+            }
+        }
+
+        // funzione libera label info appuntamento
+        public void svuotaLabelInfoAppuntamento()
+        {
+            lblMedicoAppuntamento.Text = "";
+            lblPazienteAppuntamento.Text = "";
+            lblDataAppuntamento.Text = "";
+            lblOrarioAppuntamento.Text = "";
+            lblArgomentoAppuntamento.Text = "";
+        }
 
 
         // bottone aggiungi appuntamento
@@ -394,6 +422,12 @@ namespace StudioPsicologia
         {
             RimuoviMedico rimuoviMedico = new RimuoviMedico();
             rimuoviMedico.ShowDialog(); 
+        }
+
+        // timer
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            caricaInfoAppuntamento();
         }
     }
 }

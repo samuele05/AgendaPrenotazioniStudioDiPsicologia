@@ -29,6 +29,7 @@ namespace StudioPsicologia
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnAggiungiPaziente = new System.Windows.Forms.Button();
             this.btnAggiungiMedico = new System.Windows.Forms.Button();
             this.btnRimuoviMedico = new System.Windows.Forms.Button();
@@ -51,10 +52,18 @@ namespace StudioPsicologia
             this.plSelezionaAppuntamento = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
             this.plInformazioniAppuntamento = new System.Windows.Forms.Panel();
+            this.lblArgomentoAppuntamento = new System.Windows.Forms.Label();
+            this.lblOrarioAppuntamento = new System.Windows.Forms.Label();
+            this.lblDataAppuntamento = new System.Windows.Forms.Label();
+            this.lblPazienteAppuntamento = new System.Windows.Forms.Label();
+            this.lblMedicoAppuntamento = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.plAppuntamento.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudOrario)).BeginInit();
             this.plArgomento.SuspendLayout();
             this.plSelezionaAppuntamento.SuspendLayout();
+            this.plInformazioniAppuntamento.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnAggiungiPaziente
@@ -271,7 +280,7 @@ namespace StudioPsicologia
             this.cbAppuntamenti.FormattingEnabled = true;
             this.cbAppuntamenti.Location = new System.Drawing.Point(14, 79);
             this.cbAppuntamenti.Name = "cbAppuntamenti";
-            this.cbAppuntamenti.Size = new System.Drawing.Size(620, 21);
+            this.cbAppuntamenti.Size = new System.Drawing.Size(431, 21);
             this.cbAppuntamenti.TabIndex = 23;
             // 
             // btnRimuoviAppuntamento
@@ -281,9 +290,9 @@ namespace StudioPsicologia
             this.btnRimuoviAppuntamento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRimuoviAppuntamento.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
             this.btnRimuoviAppuntamento.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(165)))), ((int)(((byte)(166)))));
-            this.btnRimuoviAppuntamento.Location = new System.Drawing.Point(436, 14);
+            this.btnRimuoviAppuntamento.Location = new System.Drawing.Point(462, 14);
             this.btnRimuoviAppuntamento.Name = "btnRimuoviAppuntamento";
-            this.btnRimuoviAppuntamento.Size = new System.Drawing.Size(198, 50);
+            this.btnRimuoviAppuntamento.Size = new System.Drawing.Size(172, 86);
             this.btnRimuoviAppuntamento.TabIndex = 23;
             this.btnRimuoviAppuntamento.Text = "Rimuovi appuntamento";
             this.btnRimuoviAppuntamento.UseVisualStyleBackColor = false;
@@ -316,10 +325,93 @@ namespace StudioPsicologia
             // plInformazioniAppuntamento
             // 
             this.plInformazioniAppuntamento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(52)))), ((int)(((byte)(70)))));
+            this.plInformazioniAppuntamento.Controls.Add(this.lblArgomentoAppuntamento);
+            this.plInformazioniAppuntamento.Controls.Add(this.lblOrarioAppuntamento);
+            this.plInformazioniAppuntamento.Controls.Add(this.lblDataAppuntamento);
+            this.plInformazioniAppuntamento.Controls.Add(this.lblPazienteAppuntamento);
+            this.plInformazioniAppuntamento.Controls.Add(this.lblMedicoAppuntamento);
+            this.plInformazioniAppuntamento.Controls.Add(this.label7);
             this.plInformazioniAppuntamento.Location = new System.Drawing.Point(436, 131);
             this.plInformazioniAppuntamento.Name = "plInformazioniAppuntamento";
             this.plInformazioniAppuntamento.Size = new System.Drawing.Size(226, 238);
             this.plInformazioniAppuntamento.TabIndex = 12;
+            // 
+            // lblArgomentoAppuntamento
+            // 
+            this.lblArgomentoAppuntamento.AutoSize = true;
+            this.lblArgomentoAppuntamento.BackColor = System.Drawing.Color.Transparent;
+            this.lblArgomentoAppuntamento.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.lblArgomentoAppuntamento.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(165)))), ((int)(((byte)(166)))));
+            this.lblArgomentoAppuntamento.Location = new System.Drawing.Point(18, 163);
+            this.lblArgomentoAppuntamento.Name = "lblArgomentoAppuntamento";
+            this.lblArgomentoAppuntamento.Size = new System.Drawing.Size(137, 13);
+            this.lblArgomentoAppuntamento.TabIndex = 28;
+            this.lblArgomentoAppuntamento.Text = "lblArgomentoAppuntamento";
+            // 
+            // lblOrarioAppuntamento
+            // 
+            this.lblOrarioAppuntamento.AutoSize = true;
+            this.lblOrarioAppuntamento.BackColor = System.Drawing.Color.Transparent;
+            this.lblOrarioAppuntamento.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.lblOrarioAppuntamento.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(165)))), ((int)(((byte)(166)))));
+            this.lblOrarioAppuntamento.Location = new System.Drawing.Point(18, 138);
+            this.lblOrarioAppuntamento.Name = "lblOrarioAppuntamento";
+            this.lblOrarioAppuntamento.Size = new System.Drawing.Size(114, 13);
+            this.lblOrarioAppuntamento.TabIndex = 27;
+            this.lblOrarioAppuntamento.Text = "lblOrarioAppuntamento";
+            // 
+            // lblDataAppuntamento
+            // 
+            this.lblDataAppuntamento.AutoSize = true;
+            this.lblDataAppuntamento.BackColor = System.Drawing.Color.Transparent;
+            this.lblDataAppuntamento.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.lblDataAppuntamento.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(165)))), ((int)(((byte)(166)))));
+            this.lblDataAppuntamento.Location = new System.Drawing.Point(18, 110);
+            this.lblDataAppuntamento.Name = "lblDataAppuntamento";
+            this.lblDataAppuntamento.Size = new System.Drawing.Size(109, 13);
+            this.lblDataAppuntamento.TabIndex = 26;
+            this.lblDataAppuntamento.Text = "lblDataAppuntamento";
+            // 
+            // lblPazienteAppuntamento
+            // 
+            this.lblPazienteAppuntamento.AutoSize = true;
+            this.lblPazienteAppuntamento.BackColor = System.Drawing.Color.Transparent;
+            this.lblPazienteAppuntamento.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.lblPazienteAppuntamento.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(165)))), ((int)(((byte)(166)))));
+            this.lblPazienteAppuntamento.Location = new System.Drawing.Point(18, 82);
+            this.lblPazienteAppuntamento.Name = "lblPazienteAppuntamento";
+            this.lblPazienteAppuntamento.Size = new System.Drawing.Size(127, 13);
+            this.lblPazienteAppuntamento.TabIndex = 25;
+            this.lblPazienteAppuntamento.Text = "lblPazienteAppuntamento";
+            // 
+            // lblMedicoAppuntamento
+            // 
+            this.lblMedicoAppuntamento.AutoSize = true;
+            this.lblMedicoAppuntamento.BackColor = System.Drawing.Color.Transparent;
+            this.lblMedicoAppuntamento.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.lblMedicoAppuntamento.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(165)))), ((int)(((byte)(166)))));
+            this.lblMedicoAppuntamento.Location = new System.Drawing.Point(18, 55);
+            this.lblMedicoAppuntamento.Name = "lblMedicoAppuntamento";
+            this.lblMedicoAppuntamento.Size = new System.Drawing.Size(121, 13);
+            this.lblMedicoAppuntamento.TabIndex = 24;
+            this.lblMedicoAppuntamento.Text = "lblMedicoAppuntamento";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.Color.Transparent;
+            this.label7.Font = new System.Drawing.Font("Nirmala UI", 12F);
+            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(165)))), ((int)(((byte)(166)))));
+            this.label7.Location = new System.Drawing.Point(17, 17);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(143, 21);
+            this.label7.TabIndex = 23;
+            this.label7.Text = "Info appuntamento";
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Form1
             // 
@@ -347,6 +439,8 @@ namespace StudioPsicologia
             this.plArgomento.PerformLayout();
             this.plSelezionaAppuntamento.ResumeLayout(false);
             this.plSelezionaAppuntamento.PerformLayout();
+            this.plInformazioniAppuntamento.ResumeLayout(false);
+            this.plInformazioniAppuntamento.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -375,6 +469,13 @@ namespace StudioPsicologia
         private System.Windows.Forms.Panel plSelezionaAppuntamento;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Panel plInformazioniAppuntamento;
+        private System.Windows.Forms.Label lblMedicoAppuntamento;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblArgomentoAppuntamento;
+        private System.Windows.Forms.Label lblOrarioAppuntamento;
+        private System.Windows.Forms.Label lblDataAppuntamento;
+        private System.Windows.Forms.Label lblPazienteAppuntamento;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

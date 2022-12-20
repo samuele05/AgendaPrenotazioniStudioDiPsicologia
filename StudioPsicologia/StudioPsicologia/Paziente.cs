@@ -42,6 +42,13 @@ namespace StudioPsicologia
         public Paziente() : this( "Paziente", "Paziente", DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year, "IBAN") { }
 
 
+        // to string paziente
+        public override string ToString()
+        {
+            return $"{nome} {cognome}";
+        }
+
+
         // formatta la stringa
         private string formattaStringa(string stringa)
         {

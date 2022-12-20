@@ -42,6 +42,13 @@ namespace StudioPsicologia
         public Medico() : this("Medico", "Medico", "//", false, 0, 0) { }
 
 
+        // to string medico
+        public override string ToString()
+        {
+            return $"{nome} {cognome}";
+        }
+
+
         // formatta stringa
         private string formattaStringa(string stringa)
         {
