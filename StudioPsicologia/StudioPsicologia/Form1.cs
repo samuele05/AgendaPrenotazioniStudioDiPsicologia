@@ -49,6 +49,8 @@ namespace StudioPsicologia
             btnRimuoviMedico.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, btnRimuoviMedico.Width, btnRimuoviMedico.Height, 10, 10));
             btnAggiungiAppuntamento.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, btnAggiungiAppuntamento.Width, btnAggiungiAppuntamento.Height, 10, 10));
             btnRimuoviAppuntamento.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, btnRimuoviAppuntamento.Width, btnRimuoviAppuntamento.Height, 10, 10));
+            btnRimuoviPaziente.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, btnRimuoviPaziente.Width, btnRimuoviPaziente.Height, 10, 10));
+            btnModificaAppuntamento.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, btnModificaAppuntamento.Width, btnModificaAppuntamento.Height, 10, 10));
 
             // pannelli
             plInformazioniAppuntamento.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, plInformazioniAppuntamento.Width, plInformazioniAppuntamento.Height, 10, 10));
@@ -137,11 +139,11 @@ namespace StudioPsicologia
 
 
         // funzione cerca paziente
-        private Paziente cercaPaziente(string codiceMedico)
+        private Paziente cercaPaziente(string codicePaziente)
         {
             Paziente paz = new Paziente();
             for (int i = 0; i < pazienti.Count; i++)
-                if (pazienti[i].getCodice() == codiceMedico)
+                if (pazienti[i].getCodice() == codicePaziente)
                     paz = pazienti[i];
             return paz;
         }
@@ -234,13 +236,17 @@ namespace StudioPsicologia
         {
             for (int i = 0; i < studio._appuntamenti.Count; i++)
             {
-                if (i == cbAppuntamenti.SelectedIndex)
+                if (cbAppuntamenti.Text != "")
                 {
-                    lblMedicoAppuntamento.Text = studio._appuntamenti[i]._medico.ToString();
-                    lblPazienteAppuntamento.Text = studio._appuntamenti[i]._paziente.ToString();
-                    lblDataAppuntamento.Text = studio._appuntamenti[i]._data;
-                    lblOrarioAppuntamento.Text = studio._appuntamenti[i]._orario.ToString();
-                    lblArgomentoAppuntamento.Text = studio._appuntamenti[i]._argomento;
+                    string codice = cbAppuntamenti.Text.Split(' ')[5];
+                    if (codice == studio._appuntamenti[i].codiceAppuntamento())
+                    {
+                        lblMedicoAppuntamento.Text = studio._appuntamenti[i]._medico.ToString();
+                        lblPazienteAppuntamento.Text = studio._appuntamenti[i]._paziente.ToString();
+                        lblDataAppuntamento.Text = studio._appuntamenti[i]._data;
+                        lblOrarioAppuntamento.Text = studio._appuntamenti[i]._orario.ToString();
+                        tbArgomentoInfoAppuntamento.Text = studio._appuntamenti[i]._argomento;
+                    }
                 }
             }
         }
@@ -292,11 +298,12 @@ namespace StudioPsicologia
         {
             if (cbAppuntamenti.Text != "")
             {
-                string codice = cbAppuntamenti.Text.Split(' ')[11];
+                string codice = cbAppuntamenti.Text.Split(' ')[5];
                 if (rimuoviAppuntamento(codice))
                 {
                     caricaCbAppuntamenti();
                     MessageBox.Show("Rimosso", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    svuotaLabelInfoAppuntamento();
                 }
                 else
                     MessageBox.Show("L'appuntamento non esiste", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -402,6 +409,21 @@ namespace StudioPsicologia
         }
 
 
+        // bottone rimuovi paziente
+        private void btnRimuoviPaziente_Click(object sender, EventArgs e)
+        {
+            RimuoviPaziente rimuoviPaziente = new RimuoviPaziente();
+            rimuoviPaziente.ShowDialog();
+        }
+
+        // bottone rimuovi medico
+        private void btnRimuoviMedico_Click(object sender, EventArgs e)
+        {
+            RimuoviMedico rimuoviMedico = new RimuoviMedico();
+            rimuoviMedico.ShowDialog();
+        }
+
+
 
         // ----------------------------------------------------------------------------------------------------
 
@@ -417,11 +439,6 @@ namespace StudioPsicologia
         {
             AggiuntaMedico aggiuntaMedico = new AggiuntaMedico();
             aggiuntaMedico.ShowDialog();
-        }
-        private void btnRimuoviMedico_Click(object sender, EventArgs e)
-        {
-            RimuoviMedico rimuoviMedico = new RimuoviMedico();
-            rimuoviMedico.ShowDialog(); 
         }
 
         // timer

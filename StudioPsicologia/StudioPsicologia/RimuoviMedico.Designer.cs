@@ -29,19 +29,10 @@ namespace StudioPsicologia
         /// </summary>
         private void InitializeComponent()
         {
-            this.tbCodiceMedico = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnRimuoviMedico = new System.Windows.Forms.Button();
+            this.cbMedici = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
-            // 
-            // tbCodiceMedico
-            // 
-            this.tbCodiceMedico.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
-            this.tbCodiceMedico.Location = new System.Drawing.Point(23, 50);
-            this.tbCodiceMedico.Name = "tbCodiceMedico";
-            this.tbCodiceMedico.Size = new System.Drawing.Size(236, 22);
-            this.tbCodiceMedico.TabIndex = 9;
-            this.tbCodiceMedico.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbCodiceMedico_KeyPress);
             // 
             // label1
             // 
@@ -69,14 +60,26 @@ namespace StudioPsicologia
             this.btnRimuoviMedico.UseVisualStyleBackColor = false;
             this.btnRimuoviMedico.Click += new System.EventHandler(this.btnRimuoviMedico_Click);
             // 
+            // cbMedici
+            // 
+            this.cbMedici.BackColor = System.Drawing.SystemColors.Window;
+            this.cbMedici.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbMedici.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
+            this.cbMedici.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.cbMedici.FormattingEnabled = true;
+            this.cbMedici.Location = new System.Drawing.Point(22, 50);
+            this.cbMedici.Name = "cbMedici";
+            this.cbMedici.Size = new System.Drawing.Size(237, 21);
+            this.cbMedici.TabIndex = 14;
+            // 
             // RimuoviMedico
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
             this.ClientSize = new System.Drawing.Size(286, 172);
+            this.Controls.Add(this.cbMedici);
             this.Controls.Add(this.btnRimuoviMedico);
-            this.Controls.Add(this.tbCodiceMedico);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -91,9 +94,8 @@ namespace StudioPsicologia
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox tbCodiceMedico;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnRimuoviMedico;
+        private System.Windows.Forms.ComboBox cbMedici;
     }
 }

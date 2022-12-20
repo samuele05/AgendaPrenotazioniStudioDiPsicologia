@@ -46,23 +46,33 @@ namespace StudioPsicologia
         {
             // bottoni
             btnRimuoviMedico.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, btnRimuoviMedico.Width, btnRimuoviMedico.Height, 10, 10));
+
+            //caricaMedici
+            caricaMedici();
+            caricaCbMedici();
         }
+
+        List<Medico> medici = new List<Medico>();
 
 
         // bottone rimuovi medico
         private void btnRimuoviMedico_Click(object sender, EventArgs e)
         {
-            if (rimuoviMedicoDallaCarica(tbCodiceMedico.Text))
+            if (cbMedici.Text != "")
             {
-                // ricarica medici
-                Form1.instance.caricaMedici();
-                Form1.instance.caricaCbMedici();
+                string codiceMedico = cbMedici.Text.Split(' ')[2];
+                if (rimuoviMedicoDallaCarica(codiceMedico))
+                {
+                    // ricarica medici
+                    Form1.instance.caricaMedici();
+                    Form1.instance.caricaCbMedici();
 
-                MessageBox.Show("Il medico è stato rimosso dalla carica", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Close();
+                    MessageBox.Show("Il medico è stato rimosso dalla carica", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close();
+                }
+                else
+                    MessageBox.Show("Il codice inserito non esiste", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else
-                MessageBox.Show("Il codice inserito non esiste", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
 
@@ -87,18 +97,18 @@ namespace StudioPsicologia
                     bool inCarica = false;
                     scrivi.Write(inCarica);
 
-                    fs.Seek(4 + 4, SeekOrigin.Current);
+                    //fs.Seek(4 + 4, SeekOrigin.Current);
 
-                    // modifico il codice medico
-                    string appo = "";
-                    for (int i = 0; i < codiceMedico.Length; i++)
-                    {
-                        if (i == 5)
-                            appo += 'F';
-                        else
-                            appo += codiceMedico[i];
-                    }
-                    scrivi.Write(appo);
+                    //// modifico il codice medico
+                    //string appo = "";
+                    //for (int i = 0; i < codiceMedico.Length; i++)
+                    //{
+                    //    if (i == 5)
+                    //        appo += 'F';
+                    //    else
+                    //        appo += codiceMedico[i];
+                    //}
+                    //scrivi.Write(appo);
 
                     fs.Close();
                     return true;
@@ -106,6 +116,43 @@ namespace StudioPsicologia
             }
             fs.Close();
             return false;
+        }
+
+
+        // funzione carica medici da file
+        private void caricaMedici()
+        {
+            medici.Clear();
+
+            FileStream fs = new FileStream("Medici.bin", FileMode.OpenOrCreate);
+            BinaryReader leggi = new BinaryReader(fs);
+
+            while (fs.Position < fs.Length)
+            {
+                Medico med = new Medico();
+
+                med._nome = leggi.ReadString().Trim(' ');
+                med._cognome = leggi.ReadString().Trim(' ');
+                med._specializzazione = leggi.ReadString().Trim(' ');
+                med._inCarica = leggi.ReadBoolean();
+                med._inizioOrario = leggi.ReadInt32();
+                med._fineOrario = leggi.ReadInt32();
+
+                fs.Seek(11, SeekOrigin.Current);
+
+                if (med._inCarica)
+                    medici.Add(med);
+            }
+            fs.Close();
+        }
+
+
+        // funzione carica medici nella combobox
+        public void caricaCbMedici()
+        {
+            cbMedici.Items.Clear();
+            for (int i = 0; i < medici.Count; i++)
+                cbMedici.Items.Add($"{medici[i]._nome} {medici[i]._cognome} {medici[i].getCodice()}");
         }
 
 

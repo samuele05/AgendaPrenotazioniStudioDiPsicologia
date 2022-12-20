@@ -79,7 +79,7 @@ namespace StudioPsicologia
             scrivi.Write(formattaStringa(nome));        // lunghezza 20
             scrivi.Write(formattaStringa(cognome));
             scrivi.Write(formattaStringa(specializzazione));
-            scrivi.Write(inCarica);                      
+            scrivi.Write(inCarica);
             scrivi.Write(inizioOrario);
             scrivi.Write(fineOrario);
 
@@ -96,7 +96,8 @@ namespace StudioPsicologia
                 $"{nome.Substring(0, 1).ToUpper()}" +
                 $"{cognome.Substring(0, 1).ToUpper()}" +
                 $"{specializzazione.Substring(0, 3).ToUpper()}" +
-                $"{inCarica.ToString().Substring(0, 1).ToUpper()}" +
+                //$"{inCarica.ToString().Substring(0, 1).ToUpper()}" +
+                $"0" +
                 $"{formattaNumero(inizioOrario)}" +
                 $"{formattaNumero(fineOrario)}";
             return codiceMedico;
