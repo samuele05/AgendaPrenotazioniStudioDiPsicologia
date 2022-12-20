@@ -132,7 +132,7 @@ namespace StudioPsicologia
         }
 
 
-        // funzione carica medici leggendo da file
+        // funzione carica appuntamenti da file
         public void caricaAppuntamenti()
         {
             FileStream fs = new FileStream("Appuntamenti.bin", FileMode.OpenOrCreate);
@@ -424,6 +424,8 @@ namespace StudioPsicologia
 
             // definisci data
             app._data = dtpDataAppuntamento.Text;
+
+            // definisci orario
             int orario = 0;
             if (cbOrariLiberi.Text != "")
                 orario = Convert.ToInt32(cbOrariLiberi.Text);
@@ -444,6 +446,142 @@ namespace StudioPsicologia
             app.scriviAppuntemento();
 
             return true;
+        }
+
+
+        // funzione inizializza e scrivi appuntamento
+        private Appuntamento definisciAppuntamentoModificato(int ora)
+        {
+            Appuntamento app = new Appuntamento();
+            string codicePaziente = cbPazienti.SelectedItem.ToString().Split(' ')[2];
+            string codiceMedico = cbMedici.SelectedItem.ToString().Split(' ')[2];
+
+            // definisci paziente
+            for (int i = 0; i < pazienti.Count; i++)
+                if (pazienti[i].getCodice() == codicePaziente)
+                    app._paziente = pazienti[i];
+
+            // definisci medico
+            for (int i = 0; i < medici.Count; i++)
+                if (medici[i].getCodice() == codiceMedico)
+                    app._medico = medici[i];
+
+            // definisci data
+            app._data = dtpDataAppuntamento.Text;
+
+            // definisci orario
+            app._orario = ora;
+
+            // definisci argomento
+            app._argomento = tbArgomentoAppuntamento.Text;
+
+            // definisci stato appuntamento
+            app._concluso = false;
+
+            return app;
+        }
+
+
+        // definisci appuntamento
+        Appuntamento appuntamento = new Appuntamento();
+        int orarioAppo = 0;
+
+        // funzione modifica appuntamento
+        public bool modificaAppuntamento()
+        {
+            if (cbAppuntamenti.Text != "")
+            {
+                string codice = cbAppuntamenti.Text.Split(' ')[5];
+                for (int i = 0; i < studio._appuntamenti.Count; i++)
+                {
+                    if (studio._appuntamenti[i].codiceAppuntamento() == codice)
+                    {
+                        // seleziona medico
+                        int medicoIndex = 0;
+                        for (int k = 0; k < cbMedici.Items.Count; k++)
+                        {
+                            cbMedici.SelectedIndex = k;
+                            if (cbMedici.Text == $"{studio._appuntamenti[i]._medico._nome} {studio._appuntamenti[i]._medico._cognome} {studio._appuntamenti[i]._medico.getCodice()}")
+                                medicoIndex = k;
+                        }
+                        cbMedici.SelectedIndex = medicoIndex;
+
+                        // seleziona paziente
+                        int pazienteIndex = 0;
+                        for (int k = 0; k < cbPazienti.Items.Count; k++)
+                        {
+                            cbPazienti.SelectedIndex = k;
+                            if (cbPazienti.Text == $"{studio._appuntamenti[i]._paziente._nome} {studio._appuntamenti[i]._paziente._cognome} {studio._appuntamenti[i]._paziente.getCodice()}")
+                                pazienteIndex = k;
+                        }
+                        cbPazienti.SelectedIndex = pazienteIndex;
+
+                        // seleziona argomento
+                        tbArgomentoAppuntamento.Text = studio._appuntamenti[i]._argomento;
+
+                        // seleziona data
+                        dtpDataAppuntamento.Text = studio._appuntamenti[i]._data;
+                    }
+                }
+            }
+            return true;
+        }
+
+
+        // bottone salva modifiche
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Appuntamento app = new Appuntamento();
+            FileStream fs = new FileStream("Appuntamenti.bin", FileMode.OpenOrCreate);
+            BinaryReader leggi = new BinaryReader(fs);
+            BinaryWriter scrivi = new BinaryWriter(fs);
+
+            if (cbAppuntamenti.Text != "")
+            {
+                string codice = cbAppuntamenti.Text.Split(' ')[5];
+
+                while (fs.Position < fs.Length)
+                {
+                    fs.Seek(app.getByte() - app.lunghezzaCodice(), SeekOrigin.Current);
+                    string codiceLetto = leggi.ReadString();
+
+                    if (codiceLetto == codice)
+                    {
+                        fs.Seek(-(app.getByte()), SeekOrigin.Current);
+
+                        // definisci orario
+                        if (cbOrarioCorrente.Checked)
+                            orarioAppo = Convert.ToInt32(lblOrarioAppuntamento.Text);
+                        else
+                        {
+                            if (cbOrariLiberi.Text != "")
+                                orarioAppo = Convert.ToInt32(cbOrariLiberi.Text);
+                            else
+                                MessageBox.Show("Inserire l'orario o confermare quello corrente", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+
+                        // definisci appuntamento
+                        appuntamento = definisciAppuntamentoModificato(orarioAppo);
+                        
+                        // scrivi appuntamento
+                        appuntamento.scriviApp(scrivi);
+                    }
+                }
+            }
+            fs.Close();
+
+            // aggiorna appuntamenti
+            studio._appuntamenti.Clear();
+            caricaAppuntamenti();
+            caricaCbAppuntamenti();
+        }
+
+
+
+        // bottone modifica appuntamento
+        private void btnModificaAppuntamento_Click(object sender, EventArgs e)
+        {
+            modificaAppuntamento();
         }
 
 
