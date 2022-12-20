@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace StudioPsicologia
 {
-    class Appuntamento
+    class Appuntamento : IComparable<Appuntamento>
     {
         Medico medico;
         Paziente paziente;
@@ -116,5 +116,16 @@ namespace StudioPsicologia
         {
             return 51;
         }
+
+        // compareTo  (raggruppamento per medico e paziente)
+        public int CompareTo(Appuntamento other)
+        {
+            if (medico.CompareTo(other.medico) == 0)
+                if (paziente.CompareTo(other.paziente) == 0)
+                    return paziente.CompareTo(other.paziente);
+            return medico.CompareTo(other.medico);
+        }
     }
 }
+
+

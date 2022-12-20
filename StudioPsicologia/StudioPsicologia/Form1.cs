@@ -221,6 +221,8 @@ namespace StudioPsicologia
         // funzione carica appuntamenti nella combobox
         public void caricaCbAppuntamenti()
         {
+            studio._appuntamenti.Sort();
+
             cbAppuntamenti.Items.Clear();
             for (int i = 0; i < studio._appuntamenti.Count; i++)
                 if (studio._appuntamenti[i]._data == dtpAppuntamenti.Text)

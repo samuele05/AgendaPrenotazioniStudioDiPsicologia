@@ -7,7 +7,7 @@ using System.IO;
 
 namespace StudioPsicologia
 {
-    class Medico
+    class Medico : IComparable<Medico>
     {
         string nome;               // 20 + 1 byte
         string cognome;            // 20 + 1 byte
@@ -117,6 +117,15 @@ namespace StudioPsicologia
         public int lunghezzaCodice()
         {
             return 11;
+        }
+
+        // compareTo
+        public int CompareTo(Medico other)
+        {
+            if (nome.CompareTo(other.nome) == 0)
+                if (cognome.CompareTo(other.cognome) == 0)
+                    return cognome.CompareTo(other.cognome);
+            return nome.CompareTo(other.nome);
         }
     }
 }

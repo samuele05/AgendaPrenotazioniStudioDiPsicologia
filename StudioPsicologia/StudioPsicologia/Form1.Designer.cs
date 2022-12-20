@@ -125,7 +125,7 @@ namespace StudioPsicologia
             this.btnAggiungiAppuntamento.Name = "btnAggiungiAppuntamento";
             this.btnAggiungiAppuntamento.Size = new System.Drawing.Size(350, 59);
             this.btnAggiungiAppuntamento.TabIndex = 3;
-            this.btnAggiungiAppuntamento.Text = "Aggiungi appuntamento";
+            this.btnAggiungiAppuntamento.Text = "Salva appuntamento";
             this.btnAggiungiAppuntamento.UseVisualStyleBackColor = false;
             this.btnAggiungiAppuntamento.Click += new System.EventHandler(this.btnAggiungiAppuntamento_Click);
             // 
