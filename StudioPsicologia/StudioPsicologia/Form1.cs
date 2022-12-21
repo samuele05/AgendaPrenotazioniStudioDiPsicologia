@@ -52,6 +52,7 @@ namespace StudioPsicologia
             btnRimuoviPaziente.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, btnRimuoviPaziente.Width, btnRimuoviPaziente.Height, 10, 10));
             btnModificaAppuntamento.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, btnModificaAppuntamento.Width, btnModificaAppuntamento.Height, 10, 10));
             btnSeleziona.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, btnSeleziona.Width, btnSeleziona.Height, 10, 10));
+            button1.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, button1.Width, button1.Height, 10, 10));
 
             // pannelli
             plInformazioniAppuntamento.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, plInformazioniAppuntamento.Width, plInformazioniAppuntamento.Height, 10, 10));
@@ -565,6 +566,9 @@ namespace StudioPsicologia
                         
                         // scrivi appuntamento
                         appuntamento.scriviApp(scrivi);
+
+                        // modifiche salvate
+                        MessageBox.Show("Modifiche salvate", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
             }
