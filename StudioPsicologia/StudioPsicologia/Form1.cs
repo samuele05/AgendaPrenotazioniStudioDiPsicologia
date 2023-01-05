@@ -59,12 +59,16 @@ namespace StudioPsicologia
             plAppuntamento.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, plAppuntamento.Width, plAppuntamento.Height, 10, 10));
             plArgomento.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, plArgomento.Width, plArgomento.Height, 10, 10));
             plSelezionaAppuntamento.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, plSelezionaAppuntamento.Width, plSelezionaAppuntamento.Height, 10, 10));
+            plInfoMedico.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, plInfoMedico.Width, plInfoMedico.Height, 10, 10));
+            plInfoPaziente.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, plInfoPaziente.Width, plInfoPaziente.Height, 10, 10));
 
 
             // funzione start
             start();
         }
 
+
+        //--------------------------------------------------------------------------------------------------------------------------------------------
 
         // liste
         List<Medico> medici = new List<Medico>();
@@ -103,57 +107,19 @@ namespace StudioPsicologia
 
             // svuota label info appuntamento
             svuotaLabelInfoAppuntamento();
+            svuotaLabelInfoMedico();
+            svuotaLabelInfoPaziente();
+
+            // carica combobox CbListaMedici/Pazienti
+            caricaCbListaMedici();
+            caricaCbListaPazienti();
+
+            // selseziona la tab appuntamenti
+            tcPagine.SelectedIndex = 2;
         }
 
 
-        // funzione orari liberi
-        public void orariLiberi()
-        {
-            cbOrariLiberi.Items.Clear();
-            List<int> lista = new List<int>();
-
-            int inizioOrario = 0;
-            int fineOrario = 0;
-            if (cbMedici.Text != "")
-            {
-                inizioOrario = cercaMedico(cbMedici.Text.Split(' ')[2])._inizioOrario;
-                fineOrario = cercaMedico(cbMedici.Text.Split(' ')[2])._fineOrario;
-            }
-
-            for (int i = 0; i < chiusura - apertura; i++)
-                lista.Add(i + 8);
-
-            for (int i = 0; i < studio._appuntamenti.Count; i++)
-                if (studio._appuntamenti[i]._data == dtpDataAppuntamento.Text)
-                    lista.Remove(studio._appuntamenti[i]._orario);
-
-            for (int i = 0; i < lista.Count; i++)
-                if (lista[i] >= inizioOrario && lista[i] < fineOrario)
-                    cbOrariLiberi.Items.Add(lista[i]);
-        }
-
-
-        // funzione carica appuntamenti da file
-        public void caricaAppuntamenti()
-        {
-            FileStream fs = new FileStream("Appuntamenti.bin", FileMode.OpenOrCreate);
-            BinaryReader leggi = new BinaryReader(fs);
-
-            while (fs.Position < fs.Length)
-            {
-                Appuntamento app = new Appuntamento();
-                app._medico = cercaMedico(leggi.ReadString());
-                app._paziente = cercaPaziente(leggi.ReadString());
-                app._data = leggi.ReadString();
-                app._argomento = leggi.ReadString();
-                app._orario = leggi.ReadInt32();
-                app._concluso = leggi.ReadBoolean();
-
-                fs.Seek(50 + 1, SeekOrigin.Current);
-                studio.aggiungiAppuntamento(app);
-            }
-            fs.Close();
-        }
+        //--------------------------------------------------------------------------------------------------------------------------------------------
 
 
         // funzione cerca medico
@@ -166,7 +132,6 @@ namespace StudioPsicologia
             return med;
         }
 
-
         // funzione cerca paziente
         private Paziente cercaPaziente(string codicePaziente)
         {
@@ -176,6 +141,9 @@ namespace StudioPsicologia
                     paz = pazienti[i];
             return paz;
         }
+
+
+        //--------------------------------------------------------------------------------------------------------------------------------------------
 
 
         // funzione carica medici da file
@@ -204,7 +172,6 @@ namespace StudioPsicologia
             fs.Close();
         }
 
-
         // funzione carica pazienti da file
         public void caricaPazienti()
         {
@@ -228,6 +195,51 @@ namespace StudioPsicologia
             }
             fs.Close();
         }
+
+        // funzione carica appuntamenti da file
+        public void caricaAppuntamenti()
+        {
+            FileStream fs = new FileStream("Appuntamenti.bin", FileMode.OpenOrCreate);
+            BinaryReader leggi = new BinaryReader(fs);
+
+            while (fs.Position < fs.Length)
+            {
+                Appuntamento app = new Appuntamento();
+                app._medico = cercaMedico(leggi.ReadString());
+                app._paziente = cercaPaziente(leggi.ReadString());
+                app._data = leggi.ReadString();
+                app._argomento = leggi.ReadString();
+                app._orario = leggi.ReadInt32();
+                app._concluso = leggi.ReadBoolean();
+
+                fs.Seek(50 + 1, SeekOrigin.Current);
+                studio.aggiungiAppuntamento(app);
+            }
+            fs.Close();
+        }
+
+
+        //--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+        // funzione carica medici nella cbListaMedici
+        public void caricaCbListaMedici()
+        {
+            cbListaMedici.Items.Clear();
+            for (int i = 0; i < medici.Count; i++)
+                cbListaMedici.Items.Add($"{medici[i]._nome} {medici[i]._cognome} {medici[i].getCodice()}");
+        }
+
+        // funzione carica pazienti nella cbListaPazienti
+        public void caricaCbListaPazienti()
+        {
+            cbListaPazienti.Items.Clear();
+            for (int i = 0; i < pazienti.Count; i++)
+                cbListaPazienti.Items.Add($"{pazienti[i]._nome} {pazienti[i]._cognome} {pazienti[i].getCodice()}");
+        }
+
+
+        //--------------------------------------------------------------------------------------------------------------------------------------------
 
 
         // funzione carica pazienti nella combobox
@@ -262,7 +274,11 @@ namespace StudioPsicologia
                         $" codice: {studio._appuntamenti[i].codiceAppuntamento()}");
         }
 
-        // funzione carica informazioni appuntamenti
+
+        //--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+        // funzione carica informazioni appuntamento
         public void caricaInfoAppuntamento()
         {
             for (int i = 0; i < studio._appuntamenti.Count; i++)
@@ -285,12 +301,84 @@ namespace StudioPsicologia
         // funzione libera label info appuntamento
         public void svuotaLabelInfoAppuntamento()
         {
-            lblMedicoAppuntamento.Text = "";
-            lblPazienteAppuntamento.Text = "";
-            lblDataAppuntamento.Text = "";
-            lblOrarioAppuntamento.Text = "";
-            lblArgomentoAppuntamento.Text = "";
+            lblMedicoAppuntamento.Text = "-";
+            lblPazienteAppuntamento.Text = "-";
+            lblDataAppuntamento.Text = "-";
+            lblOrarioAppuntamento.Text = "-";
+            tbArgomentoInfoAppuntamento.Text = "";
         }
+
+
+        //--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+        // funzione carica informazioni medico
+        public void caricaInfoMedico()
+        {
+            for (int i = 0; i < medici.Count; i++)
+            {
+                if (cbListaMedici.Text != "")
+                {
+                    string codice = cbListaMedici.Text.Split(' ')[2];
+                    if (codice == medici[i].getCodice())
+                    {
+                        lblNomeMedico.Text = medici[i]._nome;
+                        lblCognomeMedico.Text = medici[i]._cognome;
+                        lblSpecializzazioneMedico.Text = medici[i]._specializzazione;
+                        lblOrarioMedico.Text = $"{medici[i]._inizioOrario} - {medici[i]._fineOrario}";
+                        if (medici[i]._inCarica)
+                            lblInCaricaMedico.Text = "lavora";
+                        else
+                            lblInCaricaMedico.Text = "non lavora";
+                    }
+                }
+            }
+        }
+
+        // funzione libera label info medico
+        public void svuotaLabelInfoMedico()
+        {
+            lblNomeMedico.Text = "-";
+            lblCognomeMedico.Text = "-";
+            lblSpecializzazioneMedico.Text = "-";
+            lblOrarioMedico.Text = "-";
+            lblInCaricaMedico.Text = "-";
+        }
+
+
+        //--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+        // funzione carica informazioni paziente
+        public void caricaInfoPaziente()
+        {
+            for (int i = 0; i < pazienti.Count; i++)
+            {
+                if (cbListaPazienti.Text != "")
+                {
+                    string codice = cbListaPazienti.Text.Split(' ')[2];
+                    if (codice == pazienti[i].getCodice())
+                    {
+                        lblNomePaziente.Text = pazienti[i]._nome;
+                        lblCognomePaziente.Text = pazienti[i]._cognome;
+                        lblDataDiNascitaPaziente.Text = $"{pazienti[i]._giornoNascita}/{pazienti[i]._meseNascita}/{pazienti[i]._annoNascita}";
+                        lblIBANPaziente.Text = pazienti[i]._IBAN;
+                    }
+                }
+            }
+        }
+
+        // funzione libera label info paziente
+        public void svuotaLabelInfoPaziente()
+        {
+            lblNomePaziente.Text = "-";
+            lblCognomePaziente.Text = "-";
+            lblDataDiNascitaPaziente.Text = "-";
+            lblIBANPaziente.Text = "-";
+        }
+
+
+        //--------------------------------------------------------------------------------------------------------------------------------------------
 
 
         // bottone aggiungi appuntamento
@@ -323,7 +411,6 @@ namespace StudioPsicologia
             caricaCbAppuntamenti();
         }
 
-
         // bottone rimuovi appuntamento
         private void btnRimuoviAppuntamento_Click(object sender, EventArgs e)
         {
@@ -342,7 +429,10 @@ namespace StudioPsicologia
             else
                 MessageBox.Show("Inserire tutti i campi", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-        
+
+
+        //--------------------------------------------------------------------------------------------------------------------------------------------
+
 
         // funzione rimuovi appuntamento
         public bool rimuoviAppuntamento(string codiceAppuntameneto)
@@ -376,7 +466,6 @@ namespace StudioPsicologia
             return false;
         }
 
-
         // funzione esiste appuntamento
         public bool appEsiste()
         {
@@ -391,20 +480,6 @@ namespace StudioPsicologia
                             return true;
             return false;
         }
-
-
-        // controlla orario
-        public bool controllaOrario()
-        {
-            int orario = 0;
-            if (cbOrariLiberi.Text != "")
-                orario = Convert.ToInt32(cbOrariLiberi.Text);
-
-            if (orario >= apertura && orario < chiusura)
-                return true;
-            return false;
-        }
-
 
         // funzione inizializza e scrivi appuntamento
         private bool aggiungiAppuntamento()
@@ -449,7 +524,6 @@ namespace StudioPsicologia
             return true;
         }
 
-
         // funzione inizializza e scrivi appuntamento
         private Appuntamento definisciAppuntamentoModificato(int ora)
         {
@@ -481,7 +555,6 @@ namespace StudioPsicologia
 
             return app;
         }
-
 
         // definisci appuntamento
         Appuntamento appuntamento = new Appuntamento();
@@ -529,6 +602,51 @@ namespace StudioPsicologia
         }
 
 
+        //--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+        // controlla orario
+        public bool controllaOrario()
+        {
+            int orario = 0;
+            if (cbOrariLiberi.Text != "")
+                orario = Convert.ToInt32(cbOrariLiberi.Text);
+
+            if (orario >= apertura && orario < chiusura)
+                return true;
+            return false;
+        }
+
+        // funzione orari liberi
+        public void orariLiberi()
+        {
+            cbOrariLiberi.Items.Clear();
+            List<int> lista = new List<int>();
+
+            int inizioOrario = 0;
+            int fineOrario = 0;
+            if (cbMedici.Text != "")
+            {
+                inizioOrario = cercaMedico(cbMedici.Text.Split(' ')[2])._inizioOrario;
+                fineOrario = cercaMedico(cbMedici.Text.Split(' ')[2])._fineOrario;
+            }
+
+            for (int i = 0; i < chiusura - apertura; i++)
+                lista.Add(i + 8);
+
+            for (int i = 0; i < studio._appuntamenti.Count; i++)
+                if (studio._appuntamenti[i]._data == dtpDataAppuntamento.Text)
+                    lista.Remove(studio._appuntamenti[i]._orario);
+
+            for (int i = 0; i < lista.Count; i++)
+                if (lista[i] >= inizioOrario && lista[i] < fineOrario)
+                    cbOrariLiberi.Items.Add(lista[i]);
+        }
+
+
+        //--------------------------------------------------------------------------------------------------------------------------------------------
+
+
         // bottone salva modifiche
         private void button1_Click(object sender, EventArgs e)
         {
@@ -558,7 +676,10 @@ namespace StudioPsicologia
                             if (cbOrariLiberi.Text != "")
                                 orarioAppo = Convert.ToInt32(cbOrariLiberi.Text);
                             else
+                            {
                                 MessageBox.Show("Inserire l'orario o confermare quello corrente", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }     
                         }
 
                         // definisci appuntamento
@@ -578,8 +699,8 @@ namespace StudioPsicologia
             studio._appuntamenti.Clear();
             caricaAppuntamenti();
             caricaCbAppuntamenti();
+            svuotaLabelInfoAppuntamento();
         }
-
 
 
         // bottone modifica appuntamento
@@ -641,6 +762,10 @@ namespace StudioPsicologia
                 dataTest = dtpDataAppuntamento.Text;
                 medicoTest = cbMedici.Text;
             }
+
+            // aggiorna info medico
+            caricaInfoMedico();
+            caricaInfoPaziente();
         }
     }
 }

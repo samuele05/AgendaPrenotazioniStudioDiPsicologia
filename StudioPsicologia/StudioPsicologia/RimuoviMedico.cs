@@ -66,6 +66,7 @@ namespace StudioPsicologia
                     // ricarica medici
                     Form1.instance.caricaMedici();
                     Form1.instance.caricaCbMedici();
+                    Form1.instance.caricaCbListaMedici();
 
                     MessageBox.Show("Il medico è stato rimosso dalla carica", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
@@ -96,19 +97,6 @@ namespace StudioPsicologia
                     // rimuovi dalla carica
                     bool inCarica = false;
                     scrivi.Write(inCarica);
-
-                    //fs.Seek(4 + 4, SeekOrigin.Current);
-
-                    //// modifico il codice medico
-                    //string appo = "";
-                    //for (int i = 0; i < codiceMedico.Length; i++)
-                    //{
-                    //    if (i == 5)
-                    //        appo += 'F';
-                    //    else
-                    //        appo += codiceMedico[i];
-                    //}
-                    //scrivi.Write(appo);
 
                     fs.Close();
                     return true;

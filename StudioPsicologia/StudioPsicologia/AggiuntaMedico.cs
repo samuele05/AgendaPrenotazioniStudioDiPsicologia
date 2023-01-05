@@ -62,6 +62,7 @@ namespace StudioPsicologia
                     // ricarica medici
                     Form1.instance.caricaMedici();
                     Form1.instance.caricaCbMedici();
+                    Form1.instance.caricaCbListaMedici();
 
                     MessageBox.Show("Aggiunto", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
