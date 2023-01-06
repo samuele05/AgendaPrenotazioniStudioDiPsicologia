@@ -62,13 +62,6 @@ namespace StudioPsicologia
             plInfoMedico.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, plInfoMedico.Width, plInfoMedico.Height, 10, 10));
             plInfoPaziente.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, plInfoPaziente.Width, plInfoPaziente.Height, 10, 10));
 
-
-
-            // test
-            ordinaArchivioMedici();
-
-
-
             // funzione start
             start();
         }
@@ -96,6 +89,10 @@ namespace StudioPsicologia
         // funzione start
         public void start()
         {
+            // ordina => test
+            ordinaArchivioMedici();
+            ordinaArchivioPazienti();
+
             // carica pazienti
             caricaPazienti();
             caricaCbPazienti();
@@ -833,6 +830,7 @@ namespace StudioPsicologia
             BinaryReader leggi = new BinaryReader(fs);
             BinaryWriter scrivi = new BinaryWriter(fs);
             fs.Seek(0, SeekOrigin.Begin);
+            mediciIndici.Clear();
 
             while (fs.Position < fs.Length)
             {
@@ -868,17 +866,18 @@ namespace StudioPsicologia
         // funzione ordina medici in archivioPazienti (ordinamento per iban)
         public void ordinaArchivioPazienti()
         {
-            FileStream fs = new FileStream("archivioMedici.bin", FileMode.OpenOrCreate);
+            FileStream fs = new FileStream("archivioPazienti.bin", FileMode.OpenOrCreate);
             BinaryReader leggi = new BinaryReader(fs);
             BinaryWriter scrivi = new BinaryWriter(fs);
             fs.Seek(0, SeekOrigin.Begin);
+            pazientiIndici.Clear();
 
             while (fs.Position < fs.Length)
             {
-                PersPos medi;
-                medi.codice = leggi.ReadString();
-                medi.posizione = leggi.ReadInt32();
-                pazientiIndici.Add(medi);
+                PersPos pazi;
+                pazi.codice = leggi.ReadString();
+                pazi.posizione = leggi.ReadInt32();
+                pazientiIndici.Add(pazi);
             }
 
             fs.Seek(0, SeekOrigin.Begin);

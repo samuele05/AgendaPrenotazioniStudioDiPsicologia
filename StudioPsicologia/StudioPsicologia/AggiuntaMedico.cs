@@ -59,6 +59,9 @@ namespace StudioPsicologia
             {
                 if (scriviMed())
                 {
+                    // ordina => test
+                    Form1.instance.ordinaArchivioMedici();
+
                     // ricarica medici
                     Form1.instance.caricaMedici();
                     Form1.instance.caricaCbMedici();

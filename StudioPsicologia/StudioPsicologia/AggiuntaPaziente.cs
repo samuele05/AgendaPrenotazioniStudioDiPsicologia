@@ -61,6 +61,9 @@ namespace StudioPsicologia
             {
                 if (scriviPaz())
                 {
+                    // ordina => test
+                    Form1.instance.ordinaArchivioPazienti();
+
                     // ricarica pazienti
                     Form1.instance.caricaPazienti();
                     Form1.instance.caricaCbPazienti();
