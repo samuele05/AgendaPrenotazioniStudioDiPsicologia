@@ -63,6 +63,12 @@ namespace StudioPsicologia
             plInfoPaziente.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, plInfoPaziente.Width, plInfoPaziente.Height, 10, 10));
 
 
+
+            // test
+            ordinaArchivioMedici();
+
+
+
             // funzione start
             start();
         }
@@ -146,53 +152,74 @@ namespace StudioPsicologia
         //--------------------------------------------------------------------------------------------------------------------------------------------
 
 
-        // funzione carica medici da file
+        // funzione carica medici da file    <--  cerca il codice nell'archivio e prende il medico dal file
         public void caricaMedici()
         {
             medici.Clear();
 
-            FileStream fs = new FileStream("Medici.bin", FileMode.OpenOrCreate);
+            FileStream fs = new FileStream("archivioMedici.bin", FileMode.OpenOrCreate);
             BinaryReader leggi = new BinaryReader(fs);
+
+            FileStream fs1 = new FileStream("Medici.bin", FileMode.OpenOrCreate);
+            BinaryReader leggi1 = new BinaryReader(fs1);
+
+            fs.Seek(0, SeekOrigin.Begin);
 
             while (fs.Position < fs.Length)
             {
+                string codice = leggi.ReadString();
+                int posizione = leggi.ReadInt32();
+
+                // cerco il medico alla posizione
+                fs1.Seek(posizione, SeekOrigin.Begin);
+
                 Medico med = new Medico();
+                med._nome = leggi1.ReadString().Trim(' ');
+                med._cognome = leggi1.ReadString().Trim(' ');
+                med._specializzazione = leggi1.ReadString().Trim(' ');
+                med._inCarica = leggi1.ReadBoolean();
+                med._inizioOrario = leggi1.ReadInt32();
+                med._fineOrario = leggi1.ReadInt32();
 
-                med._nome = leggi.ReadString().Trim(' ');
-                med._cognome = leggi.ReadString().Trim(' ');
-                med._specializzazione = leggi.ReadString().Trim(' ');
-                med._inCarica = leggi.ReadBoolean();
-                med._inizioOrario = leggi.ReadInt32();
-                med._fineOrario = leggi.ReadInt32();
-
-                fs.Seek(11, SeekOrigin.Current);
-
+                fs1.Seek(11, SeekOrigin.Current);
                 medici.Add(med);
             }
+            fs1.Close();
             fs.Close();
         }
 
-        // funzione carica pazienti da file
+        // funzione carica pazienti da file   <--  cerca il codice nell'archivio e prende il paziente dal file
         public void caricaPazienti()
         {
             pazienti.Clear();
 
-            FileStream fs = new FileStream("Pazienti.bin", FileMode.OpenOrCreate);
+            FileStream fs = new FileStream("archivioPazienti.bin", FileMode.OpenOrCreate);
             BinaryReader leggi = new BinaryReader(fs);
+
+            FileStream fs1 = new FileStream("Pazienti.bin", FileMode.OpenOrCreate);
+            BinaryReader leggi1 = new BinaryReader(fs1);
+
+            fs.Seek(0, SeekOrigin.Begin);
 
             while (fs.Position < fs.Length)
             {
-                Paziente paz = new Paziente();
+                string codice = leggi.ReadString();
+                int posizione = leggi.ReadInt32();
 
-                paz._nome = leggi.ReadString().Trim(' ');
-                paz._cognome = leggi.ReadString().Trim(' ');
-                paz._giornoNascita = leggi.ReadInt32();
-                paz._meseNascita = leggi.ReadInt32();
-                paz._annoNascita = leggi.ReadInt32();
-                paz._IBAN = leggi.ReadString();
+                // cerco il paziente alla posizione
+                fs1.Seek(posizione, SeekOrigin.Begin);
+
+                Paziente paz = new Paziente();
+                paz._nome = leggi1.ReadString().Trim(' ');
+                paz._cognome = leggi1.ReadString().Trim(' ');
+                paz._giornoNascita = leggi1.ReadInt32();
+                paz._meseNascita = leggi1.ReadInt32();
+                paz._annoNascita = leggi1.ReadInt32();
+                paz._IBAN = leggi1.ReadString();
 
                 pazienti.Add(paz);
             }
+            fs1.Close();
             fs.Close();
         }
 
@@ -505,16 +532,11 @@ namespace StudioPsicologia
             int orario = 0;
             if (cbOrariLiberi.Text != "")
                 orario = Convert.ToInt32(cbOrariLiberi.Text);
-
             if (!(orario >= app._medico._inizioOrario && orario < app._medico._fineOrario))
                 return false;
 
             app._orario = orario;
-
-            // definisci argomento
             app._argomento = tbArgomentoAppuntamento.Text;
-
-            // definisci stato appuntamento
             app._concluso = false;
 
             // aggiungi appuntamento
@@ -541,16 +563,9 @@ namespace StudioPsicologia
                 if (medici[i].getCodice() == codiceMedico)
                     app._medico = medici[i];
 
-            // definisci data
             app._data = dtpDataAppuntamento.Text;
-
-            // definisci orario
             app._orario = ora;
-
-            // definisci argomento
             app._argomento = tbArgomentoAppuntamento.Text;
-
-            // definisci stato appuntamento
             app._concluso = false;
 
             return app;
@@ -732,7 +747,7 @@ namespace StudioPsicologia
 
 
 
-        // ----------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -767,5 +782,124 @@ namespace StudioPsicologia
             caricaInfoMedico();
             caricaInfoPaziente();
         }
+
+
+        //--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // struct persona
+        struct PersPos : IComparable<PersPos>
+        {
+            public string codice;
+            public int posizione;
+            public int CompareTo(PersPos other) => this.codice.CompareTo(other.codice);
+        }
+
+
+        //--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+        List<PersPos> mediciIndici = new List<PersPos>();
+
+        // funzione ordina medici in archivioMedici (ordinamento per codice)
+        public void ordinaArchivioMedici()
+        {
+            FileStream fs = new FileStream("archivioMedici.bin", FileMode.OpenOrCreate);
+            BinaryReader leggi = new BinaryReader(fs);
+            BinaryWriter scrivi = new BinaryWriter(fs);
+            fs.Seek(0, SeekOrigin.Begin);
+
+            while (fs.Position < fs.Length)
+            {
+                PersPos medi;
+                medi.codice = leggi.ReadString();
+                medi.posizione = leggi.ReadInt32();
+                mediciIndici.Add(medi);
+            }
+
+            fs.Seek(0, SeekOrigin.Begin);
+            ordinaMedi(scrivi); // test
+
+            fs.Close();
+        }
+
+        // funzione ordina archivio medici                      <-- fatta con interfacce per test  ( !!DA MODIFICARE!! )
+        public void ordinaMedi(BinaryWriter scrivi)
+        {
+            mediciIndici.Sort();
+            for (int i = 0; i < mediciIndici.Count; i++)
+            {
+                scrivi.Write(mediciIndici[i].codice);
+                scrivi.Write(mediciIndici[i].posizione);
+            }
+        }
+
+
+        //--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+        List<PersPos> pazientiIndici = new List<PersPos>();
+
+        // funzione ordina medici in archivioPazienti (ordinamento per iban)
+        public void ordinaArchivioPazienti()
+        {
+            FileStream fs = new FileStream("archivioMedici.bin", FileMode.OpenOrCreate);
+            BinaryReader leggi = new BinaryReader(fs);
+            BinaryWriter scrivi = new BinaryWriter(fs);
+            fs.Seek(0, SeekOrigin.Begin);
+
+            while (fs.Position < fs.Length)
+            {
+                PersPos medi;
+                medi.codice = leggi.ReadString();
+                medi.posizione = leggi.ReadInt32();
+                pazientiIndici.Add(medi);
+            }
+
+            fs.Seek(0, SeekOrigin.Begin);
+            ordinaPazi(scrivi); // test
+
+            fs.Close();
+        }
+
+        // funzione ordina archivio pazienti                      <-- fatta con interfacce per test  ( !!DA MODIFICARE!! )
+        public void ordinaPazi(BinaryWriter scrivi)
+        {
+            pazientiIndici.Sort();
+            for (int i = 0; i < pazientiIndici.Count; i++)
+            {
+                scrivi.Write(pazientiIndici[i].codice);
+                scrivi.Write(pazientiIndici[i].posizione);
+            }
+        }
+
+
+
+
     }
 }

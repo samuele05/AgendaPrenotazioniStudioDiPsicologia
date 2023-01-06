@@ -75,8 +75,9 @@ namespace StudioPsicologia
             BinaryWriter scrivi = new BinaryWriter(fs);
 
             fs.Seek(0, SeekOrigin.End);
+            int posizione = Convert.ToInt32(fs.Position);
 
-            scrivi.Write(formattaStringa(nome));        // lunghezza 20
+            scrivi.Write(formattaStringa(nome));
             scrivi.Write(formattaStringa(cognome));
             scrivi.Write(formattaStringa(specializzazione));
             scrivi.Write(inCarica);
@@ -84,6 +85,23 @@ namespace StudioPsicologia
             scrivi.Write(fineOrario);
 
             scrivi.Write(getCodice());
+
+            scriviArchivoMedici(posizione);
+
+            fs.Close();
+        }
+
+
+        // funzione scrivi archivioMedici
+        private void scriviArchivoMedici(int posizione)
+        {
+            FileStream fs = new FileStream("archivioMedici.bin", FileMode.OpenOrCreate);
+            BinaryWriter scrivi = new BinaryWriter(fs);
+
+            fs.Seek(0, SeekOrigin.End);
+
+            scrivi.Write(getCodice());
+            scrivi.Write(posizione);
 
             fs.Close();
         }

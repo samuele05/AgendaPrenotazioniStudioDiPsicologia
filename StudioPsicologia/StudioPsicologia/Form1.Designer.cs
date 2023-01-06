@@ -53,8 +53,8 @@ namespace StudioPsicologia
             this.btnRimuoviAppuntamento = new System.Windows.Forms.Button();
             this.plSelezionaAppuntamento = new System.Windows.Forms.Panel();
             this.btnSeleziona = new System.Windows.Forms.Button();
-            this.btnModificaAppuntamento = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
+            this.btnModificaAppuntamento = new System.Windows.Forms.Button();
             this.plInformazioniAppuntamento = new System.Windows.Forms.Panel();
             this.tbArgomentoInfoAppuntamento = new System.Windows.Forms.TextBox();
             this.lblArgomentoAppuntamento = new System.Windows.Forms.Label();
@@ -67,33 +67,33 @@ namespace StudioPsicologia
             this.btnRimuoviPaziente = new System.Windows.Forms.Button();
             this.tcPagine = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.cbListaMedici = new System.Windows.Forms.ComboBox();
             this.plInfoMedico = new System.Windows.Forms.Panel();
+            this.lblInCaricaMedico = new System.Windows.Forms.Label();
             this.lblOrarioMedico = new System.Windows.Forms.Label();
             this.lblSpecializzazioneMedico = new System.Windows.Forms.Label();
             this.lblCognomeMedico = new System.Windows.Forms.Label();
             this.lblNomeMedico = new System.Windows.Forms.Label();
             this.lblInfoMedico = new System.Windows.Forms.Label();
-            this.lblInCaricaMedico = new System.Windows.Forms.Label();
-            this.cbListaPazienti = new System.Windows.Forms.ComboBox();
+            this.cbListaMedici = new System.Windows.Forms.ComboBox();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.plInfoPaziente = new System.Windows.Forms.Panel();
             this.lblIBANPaziente = new System.Windows.Forms.Label();
             this.lblDataDiNascitaPaziente = new System.Windows.Forms.Label();
             this.lblCognomePaziente = new System.Windows.Forms.Label();
             this.lblNomePaziente = new System.Windows.Forms.Label();
             this.lbl = new System.Windows.Forms.Label();
+            this.cbListaPazienti = new System.Windows.Forms.ComboBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.plAppuntamento.SuspendLayout();
             this.plArgomento.SuspendLayout();
             this.plSelezionaAppuntamento.SuspendLayout();
             this.plInformazioniAppuntamento.SuspendLayout();
             this.tcPagine.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.tabPage3.SuspendLayout();
             this.plInfoMedico.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.plInfoPaziente.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnAggiungiPaziente
@@ -329,7 +329,7 @@ namespace StudioPsicologia
             // 
             this.dtpAppuntamenti.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
             this.dtpAppuntamenti.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpAppuntamenti.Location = new System.Drawing.Point(14, 51);
+            this.dtpAppuntamenti.Location = new System.Drawing.Point(14, 49);
             this.dtpAppuntamenti.Name = "dtpAppuntamenti";
             this.dtpAppuntamenti.Size = new System.Drawing.Size(116, 22);
             this.dtpAppuntamenti.TabIndex = 23;
@@ -340,9 +340,9 @@ namespace StudioPsicologia
             this.cbAppuntamenti.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
             this.cbAppuntamenti.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
             this.cbAppuntamenti.FormattingEnabled = true;
-            this.cbAppuntamenti.Location = new System.Drawing.Point(14, 79);
+            this.cbAppuntamenti.Location = new System.Drawing.Point(14, 77);
             this.cbAppuntamenti.Name = "cbAppuntamenti";
-            this.cbAppuntamenti.Size = new System.Drawing.Size(420, 21);
+            this.cbAppuntamenti.Size = new System.Drawing.Size(413, 21);
             this.cbAppuntamenti.TabIndex = 23;
             // 
             // btnRimuoviAppuntamento
@@ -379,13 +379,25 @@ namespace StudioPsicologia
             this.btnSeleziona.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSeleziona.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
             this.btnSeleziona.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(165)))), ((int)(((byte)(166)))));
-            this.btnSeleziona.Location = new System.Drawing.Point(136, 51);
+            this.btnSeleziona.Location = new System.Drawing.Point(136, 49);
             this.btnSeleziona.Name = "btnSeleziona";
             this.btnSeleziona.Size = new System.Drawing.Size(98, 22);
             this.btnSeleziona.TabIndex = 25;
             this.btnSeleziona.Text = "Seleziona";
             this.btnSeleziona.UseVisualStyleBackColor = false;
             this.btnSeleziona.Click += new System.EventHandler(this.btnSeleziona_Click);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.Transparent;
+            this.label6.Font = new System.Drawing.Font("Nirmala UI", 12F);
+            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(165)))), ((int)(((byte)(166)))));
+            this.label6.Location = new System.Drawing.Point(10, 14);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(182, 21);
+            this.label6.TabIndex = 23;
+            this.label6.Text = "Seleziona appuntamento";
             // 
             // btnModificaAppuntamento
             // 
@@ -401,18 +413,6 @@ namespace StudioPsicologia
             this.btnModificaAppuntamento.Text = "Modifica appuntamento";
             this.btnModificaAppuntamento.UseVisualStyleBackColor = false;
             this.btnModificaAppuntamento.Click += new System.EventHandler(this.btnModificaAppuntamento_Click);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.label6.Font = new System.Drawing.Font("Nirmala UI", 12F);
-            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(165)))), ((int)(((byte)(166)))));
-            this.label6.Location = new System.Drawing.Point(10, 14);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(182, 21);
-            this.label6.TabIndex = 23;
-            this.label6.Text = "Seleziona appuntamento";
             // 
             // plInformazioniAppuntamento
             // 
@@ -560,45 +560,6 @@ namespace StudioPsicologia
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Medici";
             // 
-            // tabPage2
-            // 
-            this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.tabPage2.Controls.Add(this.plInfoPaziente);
-            this.tabPage2.Controls.Add(this.cbListaPazienti);
-            this.tabPage2.Controls.Add(this.btnRimuoviPaziente);
-            this.tabPage2.Controls.Add(this.btnAggiungiPaziente);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(261, 458);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Pazienti";
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.tabPage3.Controls.Add(this.plInformazioniAppuntamento);
-            this.tabPage3.Controls.Add(this.btnModificaAppuntamento);
-            this.tabPage3.Controls.Add(this.btnRimuoviAppuntamento);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(261, 458);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Appuntamenti";
-            // 
-            // cbListaMedici
-            // 
-            this.cbListaMedici.BackColor = System.Drawing.SystemColors.Window;
-            this.cbListaMedici.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbListaMedici.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
-            this.cbListaMedici.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.cbListaMedici.FormattingEnabled = true;
-            this.cbListaMedici.Location = new System.Drawing.Point(23, 171);
-            this.cbListaMedici.Name = "cbListaMedici";
-            this.cbListaMedici.Size = new System.Drawing.Size(214, 21);
-            this.cbListaMedici.TabIndex = 26;
-            // 
             // plInfoMedico
             // 
             this.plInfoMedico.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
@@ -612,6 +573,18 @@ namespace StudioPsicologia
             this.plInfoMedico.Name = "plInfoMedico";
             this.plInfoMedico.Size = new System.Drawing.Size(214, 219);
             this.plInfoMedico.TabIndex = 29;
+            // 
+            // lblInCaricaMedico
+            // 
+            this.lblInCaricaMedico.AutoSize = true;
+            this.lblInCaricaMedico.BackColor = System.Drawing.Color.Transparent;
+            this.lblInCaricaMedico.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.lblInCaricaMedico.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(165)))), ((int)(((byte)(166)))));
+            this.lblInCaricaMedico.Location = new System.Drawing.Point(18, 166);
+            this.lblInCaricaMedico.Name = "lblInCaricaMedico";
+            this.lblInCaricaMedico.Size = new System.Drawing.Size(91, 13);
+            this.lblInCaricaMedico.TabIndex = 29;
+            this.lblInCaricaMedico.Text = "lblInCaricaMedico";
             // 
             // lblOrarioMedico
             // 
@@ -673,29 +646,31 @@ namespace StudioPsicologia
             this.lblInfoMedico.TabIndex = 23;
             this.lblInfoMedico.Text = "Info medico";
             // 
-            // lblInCaricaMedico
+            // cbListaMedici
             // 
-            this.lblInCaricaMedico.AutoSize = true;
-            this.lblInCaricaMedico.BackColor = System.Drawing.Color.Transparent;
-            this.lblInCaricaMedico.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.lblInCaricaMedico.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(165)))), ((int)(((byte)(166)))));
-            this.lblInCaricaMedico.Location = new System.Drawing.Point(18, 166);
-            this.lblInCaricaMedico.Name = "lblInCaricaMedico";
-            this.lblInCaricaMedico.Size = new System.Drawing.Size(91, 13);
-            this.lblInCaricaMedico.TabIndex = 29;
-            this.lblInCaricaMedico.Text = "lblInCaricaMedico";
+            this.cbListaMedici.BackColor = System.Drawing.SystemColors.Window;
+            this.cbListaMedici.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbListaMedici.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
+            this.cbListaMedici.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.cbListaMedici.FormattingEnabled = true;
+            this.cbListaMedici.Location = new System.Drawing.Point(23, 171);
+            this.cbListaMedici.Name = "cbListaMedici";
+            this.cbListaMedici.Size = new System.Drawing.Size(214, 21);
+            this.cbListaMedici.TabIndex = 26;
             // 
-            // cbListaPazienti
+            // tabPage2
             // 
-            this.cbListaPazienti.BackColor = System.Drawing.SystemColors.Window;
-            this.cbListaPazienti.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbListaPazienti.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
-            this.cbListaPazienti.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
-            this.cbListaPazienti.FormattingEnabled = true;
-            this.cbListaPazienti.Location = new System.Drawing.Point(23, 171);
-            this.cbListaPazienti.Name = "cbListaPazienti";
-            this.cbListaPazienti.Size = new System.Drawing.Size(214, 21);
-            this.cbListaPazienti.TabIndex = 27;
+            this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
+            this.tabPage2.Controls.Add(this.plInfoPaziente);
+            this.tabPage2.Controls.Add(this.cbListaPazienti);
+            this.tabPage2.Controls.Add(this.btnRimuoviPaziente);
+            this.tabPage2.Controls.Add(this.btnAggiungiPaziente);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(261, 458);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Pazienti";
             // 
             // plInfoPaziente
             // 
@@ -770,6 +745,31 @@ namespace StudioPsicologia
             this.lbl.TabIndex = 23;
             this.lbl.Text = "Info paziente";
             // 
+            // cbListaPazienti
+            // 
+            this.cbListaPazienti.BackColor = System.Drawing.SystemColors.Window;
+            this.cbListaPazienti.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbListaPazienti.Font = new System.Drawing.Font("Nirmala UI", 8.25F);
+            this.cbListaPazienti.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.cbListaPazienti.FormattingEnabled = true;
+            this.cbListaPazienti.Location = new System.Drawing.Point(23, 171);
+            this.cbListaPazienti.Name = "cbListaPazienti";
+            this.cbListaPazienti.Size = new System.Drawing.Size(214, 21);
+            this.cbListaPazienti.TabIndex = 27;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
+            this.tabPage3.Controls.Add(this.plInformazioniAppuntamento);
+            this.tabPage3.Controls.Add(this.btnModificaAppuntamento);
+            this.tabPage3.Controls.Add(this.btnRimuoviAppuntamento);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(261, 458);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Appuntamenti";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -796,12 +796,12 @@ namespace StudioPsicologia
             this.plInformazioniAppuntamento.PerformLayout();
             this.tcPagine.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage3.ResumeLayout(false);
             this.plInfoMedico.ResumeLayout(false);
             this.plInfoMedico.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
             this.plInfoPaziente.ResumeLayout(false);
             this.plInfoPaziente.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

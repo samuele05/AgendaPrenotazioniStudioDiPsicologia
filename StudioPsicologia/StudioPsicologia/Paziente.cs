@@ -66,7 +66,8 @@ namespace StudioPsicologia
             FileStream fs = new FileStream("Pazienti.bin", FileMode.OpenOrCreate);
             BinaryWriter scrivi = new BinaryWriter(fs);
 
-            fs.Seek(0, SeekOrigin.End);       // chiedere se va bene
+            fs.Seek(0, SeekOrigin.End);
+            int posizione = Convert.ToInt32(fs.Position);
 
             scrivi.Write(formattaStringa(nome));
             scrivi.Write(formattaStringa(cognome));
@@ -76,24 +77,27 @@ namespace StudioPsicologia
 
             scrivi.Write(IBAN);
 
+            scriviArchivoPazienti(posizione);
+
             fs.Close();
         }
- 
 
-        // crea codice paziente
-        //private string cadicePaziente()    // aggiungere identificatore paziente
-        //{
-        //    string codicePaziente = 
-        //        $"{nome.Substring(0, 1).ToUpper()}" +
-        //        $"{cognome.Substring(0, 1).ToUpper()}" +
-        //        $"{formattaNumero(giornoNascita)}" +
-        //        $"{formattaNumero(meseNascita)}" +
-        //        $"{annoNascita}";
+        // funzione scrivi archivioMedici
+        private void scriviArchivoPazienti(int posizione)
+        {
+            FileStream fs = new FileStream("archivioPazienti.bin", FileMode.OpenOrCreate);
+            BinaryWriter scrivi = new BinaryWriter(fs);
 
-        //    return codicePaziente;
-        //}
+            fs.Seek(0, SeekOrigin.End);
+
+            scrivi.Write(getCodice());
+            scrivi.Write(posizione);
+
+            fs.Close();
+        }
 
 
+        // funzione formatta numero
         private string formattaNumero(int numero)
         {
             if (numero < 10)
