@@ -785,43 +785,23 @@ namespace StudioPsicologia
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         // struct persona
-        struct PersPos : IComparable<PersPos>
+        struct PersPos //: IComparable<PersPos>
         {
             public string codice;
             public int posizione;
-            public int CompareTo(PersPos other) => this.codice.CompareTo(other.codice);
+            //public int CompareTo(PersPos other) => this.codice.CompareTo(other.codice);
+
+            public void scriviPers(BinaryWriter scrivi)
+            {
+                scrivi.Write(codice);
+                scrivi.Write(posizione);
+            }
         }
 
 
         //--------------------------------------------------------------------------------------------------------------------------------------------
 
-
-        List<PersPos> mediciIndici = new List<PersPos>();
 
         // funzione ordina medici in archivioMedici (ordinamento per codice)
         public void ordinaArchivioMedici()
@@ -830,38 +810,45 @@ namespace StudioPsicologia
             BinaryReader leggi = new BinaryReader(fs);
             BinaryWriter scrivi = new BinaryWriter(fs);
             fs.Seek(0, SeekOrigin.Begin);
-            mediciIndici.Clear();
 
-            while (fs.Position < fs.Length)
+            long posizione1;
+            for (long i = 0; i < fs.Length; i = posizione1)
             {
-                PersPos medi;
-                medi.codice = leggi.ReadString();
-                medi.posizione = leggi.ReadInt32();
-                mediciIndici.Add(medi);
+                fs.Seek(i, SeekOrigin.Begin);
+
+                PersPos medico1;
+                medico1.codice = leggi.ReadString();
+                medico1.posizione = leggi.ReadInt32();
+                posizione1 = fs.Position;
+
+                long posizione2;
+                for (long j = 0; j < fs.Length; j = posizione2)
+                {
+                    fs.Seek(j, SeekOrigin.Begin);
+
+                    PersPos medico2;
+                    medico2.codice = leggi.ReadString();
+                    medico2.posizione = leggi.ReadInt32();
+                    posizione2 = fs.Position;
+
+                    if (medico1.codice.CompareTo(medico2.codice) < 0)
+                    {
+                        fs.Seek(j, SeekOrigin.Begin);
+                        medico1.scriviPers(scrivi);
+
+                        fs.Seek(i, SeekOrigin.Begin);
+                        medico2.scriviPers(scrivi);
+
+                        medico1 = medico2;
+                    }
+                }
             }
-
-            fs.Seek(0, SeekOrigin.Begin);
-            ordinaMedi(scrivi); // test
-
             fs.Close();
-        }
-
-        // funzione ordina archivio medici                      <-- fatta con interfacce per test  ( !!DA MODIFICARE!! )
-        public void ordinaMedi(BinaryWriter scrivi)
-        {
-            mediciIndici.Sort();
-            for (int i = 0; i < mediciIndici.Count; i++)
-            {
-                scrivi.Write(mediciIndici[i].codice);
-                scrivi.Write(mediciIndici[i].posizione);
-            }
         }
 
 
         //--------------------------------------------------------------------------------------------------------------------------------------------
 
-
-        List<PersPos> pazientiIndici = new List<PersPos>();
 
         // funzione ordina medici in archivioPazienti (ordinamento per iban)
         public void ordinaArchivioPazienti()
@@ -870,35 +857,40 @@ namespace StudioPsicologia
             BinaryReader leggi = new BinaryReader(fs);
             BinaryWriter scrivi = new BinaryWriter(fs);
             fs.Seek(0, SeekOrigin.Begin);
-            pazientiIndici.Clear();
 
-            while (fs.Position < fs.Length)
+            long posizione1;
+            for (long i = 0; i < fs.Length; i = posizione1)
             {
-                PersPos pazi;
-                pazi.codice = leggi.ReadString();
-                pazi.posizione = leggi.ReadInt32();
-                pazientiIndici.Add(pazi);
+                fs.Seek(i, SeekOrigin.Begin);
+
+                PersPos paziente1;
+                paziente1.codice = leggi.ReadString();
+                paziente1.posizione = leggi.ReadInt32();
+                posizione1 = fs.Position;
+
+                long posizione2;
+                for (long j = 0; j < fs.Length; j = posizione2)
+                {
+                    fs.Seek(j, SeekOrigin.Begin);
+
+                    PersPos paziente2;
+                    paziente2.codice = leggi.ReadString();
+                    paziente2.posizione = leggi.ReadInt32();
+                    posizione2 = fs.Position;
+
+                    if (paziente1.codice.CompareTo(paziente2.codice) < 0)
+                    {
+                        fs.Seek(j, SeekOrigin.Begin);
+                        paziente1.scriviPers(scrivi);
+
+                        fs.Seek(i, SeekOrigin.Begin);
+                        paziente2.scriviPers(scrivi);
+
+                        paziente1 = paziente2;
+                    }
+                }
             }
-
-            fs.Seek(0, SeekOrigin.Begin);
-            ordinaPazi(scrivi); // test
-
             fs.Close();
         }
-
-        // funzione ordina archivio pazienti                      <-- fatta con interfacce per test  ( !!DA MODIFICARE!! )
-        public void ordinaPazi(BinaryWriter scrivi)
-        {
-            pazientiIndici.Sort();
-            for (int i = 0; i < pazientiIndici.Count; i++)
-            {
-                scrivi.Write(pazientiIndici[i].codice);
-                scrivi.Write(pazientiIndici[i].posizione);
-            }
-        }
-
-
-
-
     }
 }
